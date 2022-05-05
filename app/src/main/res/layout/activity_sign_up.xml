@@ -4,15 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".SignUpActivity">
 
     <Button
         android:id="@+id/button"
         android:layout_width="300dp"
         android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="92dp"
         android:background="@drawable/button_background"
-        android:onClick="login"
-        android:text="Login"
+        android:text="SIGN-UP"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:cornerRadius="4dp"
@@ -20,14 +21,31 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword"
-        app:layout_constraintVertical_bias="0.076" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword2"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="304dp"
+        android:background="@drawable/edittext_background"
+        android:drawableStart="@drawable/ic_person"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:hint="Name"
+        android:inputType="textEmailAddress"
+        android:paddingHorizontal="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/editTextTextEmailAddress"
         android:layout_width="300dp"
         android:layout_height="48dp"
-        android:layout_marginTop="304dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/edittext_background"
         android:drawableStart="@drawable/ic_email"
         android:drawablePadding="12dp"
@@ -36,9 +54,9 @@
         android:inputType="textEmailAddress"
         android:paddingHorizontal="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
 
     <EditText
         android:id="@+id/editTextTextPassword"
@@ -51,8 +69,8 @@
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
-        android:longClickable="false"
         android:paddingHorizontal="10dp"
+        android:longClickable="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
@@ -60,10 +78,10 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="150dp"
+        android:layout_width="210dp"
         android:layout_height="30dp"
         android:gravity="center"
-        android:text="Need an account?"
+        android:text="Already have an account?"
         android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -79,10 +97,10 @@
         android:layout_width="80dp"
         android:layout_height="30dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="85dp"
+        android:layout_marginEnd="56dp"
         android:background="@drawable/button_background"
-        android:onClick="signUp"
-        android:text="Sign-up"
+        android:onClick="logIn"
+        android:text="Log-In"
         android:textColor="@color/white"
         android:textSize="15sp"
         app:cornerRadius="4dp"
@@ -134,19 +152,22 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/programmer" />
 
-    <ImageView
-        android:id="@+id/passwordVisibility"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="380dp"
-        android:layout_marginEnd="57dp"
-        android:onClick="togglePasswordVisibility"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <EditText
+        android:id="@+id/editTextTextPassword2"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/edittext_background"
+        android:drawableStart="@drawable/ic_lock"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:longClickable="false"
+        android:hint="Confirm Password"
+        android:inputType="textPassword"
+        android:paddingHorizontal="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/ic_password_invisible" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
