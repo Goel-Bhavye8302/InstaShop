@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
@@ -47,6 +49,22 @@ public class MainActivity extends AppCompatActivity {
         password = findViewById(R.id.editTextTextPassword);
         togglePasswordVisibility = findViewById(R.id.passwordVisibility);
 
+        password.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (password.getText().length() != 0){
+                    togglePasswordVisibility.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
         ParseAnalytics.trackAppOpenedInBackground(getIntent());
     }
 
@@ -70,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
             if(TextUtils.isEmpty(eMail.getText())) eMail.setError("Email-Id Required");
             if(TextUtils.isEmpty(password.getText())) {
                 password.setError("Password Required");
+                togglePasswordVisibility.setVisibility(View.INVISIBLE);
             }
         }
         else{
@@ -80,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Logged In!", Toast.LENGTH_SHORT).show();
                     }
                     else {
+                        ParseUser.logOut();
                         e.printStackTrace();
                         Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
@@ -87,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
             });
         }
     }
+
     public void signUp(View view){
         Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
         startActivity(intent);
