@@ -1,5 +1,6 @@
 package com.ai.game.instashop;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -80,6 +81,23 @@ public class SignUpActivity extends AppCompatActivity {
         finish();
     }
 
+    private void showAlert(String title, String message, boolean error) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this)
+                .setTitle(title)
+                .setMessage(message)
+                .setPositiveButton("OK", (dialog, which) -> {
+                    dialog.cancel();
+                    // don't forget to change the line below with the names of your Activities
+                    if (!error) {
+                        Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                    }
+                });
+        AlertDialog ok = builder.create();
+        ok.show();
+    }
+
     public void signUp(View view){
         if(TextUtils.isEmpty(name.getText()) || TextUtils.isEmpty(eMail.getText()) || TextUtils.isEmpty(password.getText()) || TextUtils.isEmpty(confirmPassword.getText())) {
             if(TextUtils.isEmpty(eMail.getText())) eMail.setError("Email-Id Required");
@@ -107,11 +125,13 @@ public class SignUpActivity extends AppCompatActivity {
                 @Override
                 public void done(ParseException e) {
                     if(e == null){
-                        Toast.makeText(getApplicationContext(), "Sign-Up Successful", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getApplicationContext(), "Sign-Up Successful", Toast.LENGTH_SHORT).show();
+                        showAlert("Account Created Successfully!", "Please verify your email before Login", false);
                     }
                     else {
                         ParseUser.logOut();
-                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                        showAlert("Error Account Creation failed", "Account could not be created" + " :" + e.getMessage(), true);
                         e.printStackTrace();
                     }
                 }

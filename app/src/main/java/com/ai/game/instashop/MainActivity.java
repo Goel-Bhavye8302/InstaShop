@@ -1,6 +1,7 @@
 package com.ai.game.instashop;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -83,6 +84,23 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void showAlert(String title, String message, boolean error) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this)
+                .setTitle(title)
+                .setMessage(message)
+                .setPositiveButton("OK", (dialog, which) -> {
+                    dialog.cancel();
+                    // don't forget to change the line below with the names of your Activities
+//                    if (!error) {
+//                        Intent intent = new Intent(MainActivity.this, MainActivity.class);
+//                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                        startActivity(intent);
+//                    }
+                });
+        AlertDialog ok = builder.create();
+        ok.show();
+    }
+
     public void login(View view){
         if(TextUtils.isEmpty(eMail.getText()) || TextUtils.isEmpty(password.getText())) {
             if(TextUtils.isEmpty(eMail.getText())) eMail.setError("Email-Id Required");
@@ -96,12 +114,14 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void done(ParseUser user, ParseException e) {
                     if(e == null && user != null){
-                        Toast.makeText(getApplicationContext(), "Logged In!", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getApplicationContext(), "Logged In!", Toast.LENGTH_SHORT).show();
+                        showAlert("Login Successful", "Welcome!", false);
                     }
                     else {
                         ParseUser.logOut();
                         e.printStackTrace();
-                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                        showAlert("Login Fail", e.getMessage() + " Please try again", true);
                     }
                 }
             });
@@ -110,6 +130,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void signUp(View view){
         Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
+        startActivity(intent);
+    }
+
+    public void resetPassword(View view) {
+        Intent intent = new Intent(getApplicationContext(), ResetPasswordActivity.class);
         startActivity(intent);
     }
 }
