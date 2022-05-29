@@ -12,6 +12,7 @@ import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -24,12 +25,20 @@ import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
-public class SignUpActivity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity implements View.OnKeyListener{
     public EditText name, eMail, password, confirmPassword;
     public ImageView togglePasswordVisibility;
     public ImageView togglePasswordVisibility2;
     public Boolean passwordVisible = false;
     public Boolean passwordVisible2 = false;
+
+    @Override
+    public boolean onKey(View v, int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN){
+            signUp(v);
+        }
+        return false;
+    }
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
@@ -86,6 +95,7 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
+        confirmPassword.setOnKeyListener(this);
         ParseAnalytics.trackAppOpenedInBackground(getIntent());
     }
 
