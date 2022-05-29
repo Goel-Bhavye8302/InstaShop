@@ -3,6 +3,7 @@ package com.ai.game.instashop;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -11,7 +12,9 @@ import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -27,6 +30,15 @@ public class SignUpActivity extends AppCompatActivity {
     public ImageView togglePasswordVisibility2;
     public Boolean passwordVisible = false;
     public Boolean passwordVisible2 = false;
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (getCurrentFocus() != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        }
+        return super.dispatchTouchEvent(ev);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,7 +128,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         else{
             ParseUser user = new ParseUser();
-            user.setUsername(eMail.getText().toString().trim());
+            user.setUsername(name.getText().toString().trim());
             user.setEmail(eMail.getText().toString().trim());
             user.setPassword(password.getText().toString());
             user.put("Name", name.getText().toString().trim());
