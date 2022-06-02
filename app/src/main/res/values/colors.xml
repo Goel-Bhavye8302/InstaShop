@@ -12,4 +12,26 @@
     <color name="colorPrimaryDark">#6200EA</color>
     <color name="colorAccent">#F50057</color>
     <color name="colorAccentPressed">#890332</color>
+    <color name="tabIconColor">#FFFFFF</color>
+    <color name="beigeColor">#ECC499</color>
+    
+<!--    pallet-->
+    <color name="gray1">#2B2D42</color>
+    <color name="gray2">#8d99ae</color>
+    <color name="white1">#EDF2F4</color>
+    <color name="red1">#EF233C</color>
+    <color name="red2">#D90429</color>
+
+<!--    alata-->
+<!--    armata-->
+<!--    Barriecito-->
+<!--major mono display-->
+<!--    megrim-->
+<!--k2d-->
+<!--    Contrail One-->
+<!--cookie-->
+<!--    Covered By Your Grace-->
+<!--    Faster One-->
+<!--    Finger Paint-->
+
 </resources>

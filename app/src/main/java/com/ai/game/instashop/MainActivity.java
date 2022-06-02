@@ -69,6 +69,11 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if(ParseUser.getCurrentUser() != null){
+            Intent intent = new Intent(getApplicationContext(), HomePage.class);
+            startActivity(intent);
+            finish();
+        }
         eMail = findViewById(R.id.editTextTextEmailAddress);
         password = findViewById(R.id.editTextTextPassword);
         togglePasswordVisibility = findViewById(R.id.passwordVisibility);
@@ -115,12 +120,6 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
                 .setMessage(message)
                 .setPositiveButton("OK", (dialog, which) -> {
                     dialog.cancel();
-                    // don't forget to change the line below with the names of your Activities
-//                    if (!error) {
-//                        Intent intent = new Intent(MainActivity.this, MainActivity.class);
-//                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-//                        startActivity(intent);
-//                    }
                 });
         AlertDialog ok = builder.create();
         ok.show();
@@ -139,13 +138,14 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
                 @Override
                 public void done(ParseUser user, ParseException e) {
                     if(e == null && user != null){
-//                        Toast.makeText(getApplicationContext(), "Logged In!", Toast.LENGTH_SHORT).show();
-                        showAlert("Login Successful", "Welcome!", false);
+                        Intent intent = new Intent(getApplicationContext(), HomePage.class);
+                        startActivity(intent);
+                        Toast.makeText(getApplicationContext(), "Welcome!", Toast.LENGTH_SHORT).show();
+//                        showAlert("Login Successful", "Welcome!", false);
                     }
                     else {
                         ParseUser.logOut();
                         e.printStackTrace();
-//                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                         showAlert("Login Fail", e.getMessage() + " Please try again", true);
                     }
                 }
