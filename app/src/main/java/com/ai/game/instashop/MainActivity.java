@@ -72,7 +72,8 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
         if(ParseUser.getCurrentUser() != null){
             Intent intent = new Intent(getApplicationContext(), HomePage.class);
             startActivity(intent);
-            finish();
+            Toast.makeText(this, ParseUser.getCurrentUser().getUsername(), Toast.LENGTH_SHORT).show();
+//            finish();
         }
         eMail = findViewById(R.id.editTextTextEmailAddress);
         password = findViewById(R.id.editTextTextPassword);

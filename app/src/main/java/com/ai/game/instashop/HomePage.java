@@ -3,6 +3,7 @@ package com.ai.game.instashop;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
@@ -68,11 +69,14 @@ public class HomePage extends AppCompatActivity implements ChipNavigationBar.OnI
         loadFragments(fragment);
     }
 
-    @Override
-    public void onBackPressed() {
-        if(navigationBar.getSelectedItemId() == R.id.home){
-            finish();
-        }
-    }
+//    @Override
+//    public void onBackPressed() {
+//        if(navigationBar.getSelectedItemId() == R.id.home){
+//            Intent a = new Intent(Intent.ACTION_MAIN);
+//            a.addCategory(Intent.CATEGORY_HOME);
+//            a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//            startActivity(a);
+//        }
+//    }
 
 }

@@ -29,7 +29,7 @@ android {
 
 dependencies {
 
-    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'androidx.appcompat:appcompat:1.4.2'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
@@ -38,12 +38,21 @@ dependencies {
     implementation "com.github.parse-community.Parse-SDK-Android:parse:3.0.0"
 
     // Design Library for Coordinator layout and Toolbars
-    implementation 'com.google.android.material:material:1.6.0'
+    implementation 'com.google.android.material:material:1.6.1'
 
-    // Bottom Navigation 
-    implementation 'com.github.iammert:ReadableBottomBar:0.2'
+    // Bottom Navigation
     implementation 'com.github.ismaeldivita:chip-navigation-bar:1.4.0'
     implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.6.0'
+
+    // Circular Image View
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    // Dynamic Sizes Library
+    implementation 'com.github.MrNouri:DynamicSizes:1.0'
+    implementation 'com.auto.adjust:dimens:1.0.9'
+
+    // Rounded Image View
+    implementation 'com.makeramen:roundedimageview:2.3.0'
 }
 
 repositories {

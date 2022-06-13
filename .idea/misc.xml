@@ -23,19 +23,21 @@
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/drawable/ic_twotone_home_24.xml" value="0.2165" />
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/drawable/image_background.xml" value="0.2484375" />
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/drawable/pressed_button_shape.xml" value="0.2484375" />
-        <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/layout/activity_home_page.xml" value="0.152" />
-        <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/drawable/stories_background.xml" value="0.2115" />
+        <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/layout/activity_home_page.xml" value="0.2" />
+        <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/layout/activity_reset_password.xml" value="0.2" />
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/layout/activity_sign_up.xml" value="0.264" />
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/layout/activity_utility.xml" value="0.1905982905982906" />
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/layout/activity_verify_otp.xml" value="0.1905982905982906" />
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/layout/bottom_nav_layout.xml" value="0.17905982905982906" />
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/layout/fragment_feed.xml" value="0.1905982905982906" />
-        <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/layout/fragment_home.xml" value="0.1905982905982906" />
+        <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/layout/fragment_home.xml" value="0.19768664563617244" />
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/layout/fragment_profile.xml" value="0.1905982905982906" />
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/layout/fragment_shop.xml" value="0.17905982905982906" />
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/layout/layout_center_viewpager.xml" value="0.17905982905982906" />
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/layout/middle_section_layout.xml" value="0.1905982905982906" />
+        <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/layout/stories_rv_layout.xml" value="0.6" />
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/layout/tabs.xml" value="0.17905982905982906" />
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/layout/top_toolbar_layout.xml" value="0.17905982905982906" />
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/menu/navbar_menu.xml" value="0.18974358974358974" />
