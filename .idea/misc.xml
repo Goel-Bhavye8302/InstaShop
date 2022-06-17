@@ -22,13 +22,14 @@
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/drawable/ic_person2.xml" value="0.1925" />
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/drawable/ic_post_menu.xml" value="0.2385" />
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/drawable/ic_save_post.xml" value="0.2385" />
+        <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/drawable/ic_settings.xml" value="0.2385" />
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/drawable/ic_shop.xml" value="0.1925" />
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/drawable/ic_twotone_home_24.xml" value="0.2165" />
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/drawable/image_background.xml" value="0.2484375" />
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/drawable/pressed_button_shape.xml" value="0.2484375" />
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/drawable/profile_background.xml" value="0.2385" />
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/drawable/stories_background.xml" value="0.2115" />
-        <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/layout/activity_home_page.xml" value="0.2" />
+        <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/layout/activity_home_page.xml" value="0.1" />
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/layout/activity_reset_password.xml" value="0.2" />
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/layout/activity_sign_up.xml" value="0.264" />
@@ -38,7 +39,7 @@
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/layout/feed_rv_layout.xml" value="0.2" />
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/layout/fragment_feed.xml" value="0.1905982905982906" />
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/layout/fragment_home.xml" value="0.17105263157894737" />
-        <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/layout/fragment_profile.xml" value="0.23685608072225173" />
+        <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/layout/fragment_profile.xml" value="0.2" />
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/layout/fragment_shop.xml" value="0.17905982905982906" />
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/layout/layout_center_viewpager.xml" value="0.17905982905982906" />
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/layout/middle_section_layout.xml" value="0.1905982905982906" />
@@ -47,6 +48,7 @@
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/layout/tabs.xml" value="0.17905982905982906" />
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/layout/top_toolbar_layout.xml" value="0.17905982905982906" />
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/menu/navbar_menu.xml" value="0.18974358974358974" />
+        <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/menu/profile_menu.xml" value="0.18974358974358974" />
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/xml/tabs.xml" value="0.18974358974358974" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/InstaShop/app/src/main/res/layout/activity_main.xml" value="0.19701086956521738" />
       </map>

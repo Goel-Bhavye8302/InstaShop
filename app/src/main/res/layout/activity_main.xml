@@ -17,7 +17,7 @@
         android:fontFamily="@font/contrail_one"
         android:onClick="login"
         android:text="Login"
-        android:textColor="@color/white"
+        android:textColor="@color/white1"
         android:textSize="@dimen/_18asp"
         app:cornerRadius="4dp"
         app:layout_constraintBottom_toBottomOf="parent"

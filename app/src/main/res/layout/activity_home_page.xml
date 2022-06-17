@@ -1,35 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:sothree="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/constraint_layout"
+    android:id="@+id/sliding_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white1"
-    tools:context=".HomePage">
+    android:layout_height="wrap_content"
+    android:gravity="bottom"
+    sothree:umanoPanelHeight="0dp"
+    sothree:umanoShadowHeight="4dp">
 
-    <com.ismaeldivita.chipnavigation.ChipNavigationBar
-        android:id="@+id/navbar"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/constraint_layout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_47mdp"
-        android:background="@color/red2"
-        app:cnb_menuResource="@menu/navbar_menu"
-        app:cnb_unselectedColor="@color/white1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragmentContainerView" />
+        android:layout_height="match_parent"
+        android:background="@color/white1"
+        tools:context=".HomePage">
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView"
-        android:name="com.ai.game.instashop.Fragment.HomeFragment"
+        <com.ismaeldivita.chipnavigation.ChipNavigationBar
+            android:id="@+id/navbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_47mdp"
+            android:background="@color/red2"
+            app:cnb_menuResource="@menu/navbar_menu"
+            app:cnb_unselectedColor="@color/white1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragmentContainerView" />
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentContainerView"
+            android:name="com.ai.game.instashop.Fragment.HomeFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/navbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:minHeight="?attr/actionBarSize"
+            app:collapseIcon="@drawable/ic_settings"
+            app:menu="@menu/profile_menu"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
+            app:titleTextColor="@color/white1"
+            app:popupTheme="@style/Theme.AppCompat.Light"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/navbar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="wrap_content"
+        android:background="@color/white1">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/imageView1"
+            android:layout_width="@dimen/_60mdp"
+            android:layout_height="@dimen/_4mdp"
+            android:layout_marginTop="8dp"
+            android:scaleType="centerCrop"
+            android:src="@color/gray2"
+            sothree:layout_constraintEnd_toEndOf="parent"
+            sothree:layout_constraintHorizontal_bias="0.5"
+            sothree:layout_constraintStart_toStartOf="parent"
+            sothree:layout_constraintTop_toTopOf="parent"
+            sothree:riv_corner_radius="20dip"
+            sothree:riv_mutate_background="true" />
+
+        <Button
+            android:id="@+id/profile_logout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="16dp"
+            android:text="Logout"
+            android:drawableStart="@drawable/logout2"
+            android:gravity="center_vertical|start"
+            android:drawablePadding="8dp"
+            android:background="@color/transparent"
+            android:textColor="@color/gray1"
+            android:textSize="@dimen/_18asp"
+            sothree:layout_constraintBottom_toBottomOf="parent"
+            sothree:layout_constraintEnd_toEndOf="parent"
+            sothree:layout_constraintHorizontal_bias="0.5"
+            sothree:layout_constraintStart_toStartOf="parent"
+            sothree:layout_constraintTop_toBottomOf="@id/imageView1" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</com.sothree.slidinguppanel.SlidingUpPanelLayout>

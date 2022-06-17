@@ -15,6 +15,7 @@ import com.ai.game.instashop.Model.PostModel;
 import com.ai.game.instashop.Model.ProfileFriendsModel;
 import com.ai.game.instashop.Model.StoryModel;
 import com.ai.game.instashop.R;
+import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import java.util.ArrayList;
 
