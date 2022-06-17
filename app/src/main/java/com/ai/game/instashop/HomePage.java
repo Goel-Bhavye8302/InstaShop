@@ -3,14 +3,12 @@ package com.ai.game.instashop;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.widget.Toast;
 
-import com.ai.game.instashop.Fragment.FeedFragment;
+import com.ai.game.instashop.Fragment.ChatFragment;
 import com.ai.game.instashop.Fragment.HomeFragment;
 import com.ai.game.instashop.Fragment.ProfileFragment;
 import com.ai.game.instashop.Fragment.ShopFragment;
@@ -56,8 +54,8 @@ public class HomePage extends AppCompatActivity implements ChipNavigationBar.OnI
             case R.id.home:
                 fragment = new HomeFragment();
                 break;
-            case R.id.feed:
-                fragment = new FeedFragment();
+            case R.id.chat:
+                fragment = new ChatFragment();
                 break;
             case R.id.shop:
                 fragment = new ShopFragment();

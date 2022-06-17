@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="12dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_image"
+        android:layout_width="@dimen/_44mdp"
+        android:layout_height="@dimen/_44mdp"
+        android:layout_marginStart="@dimen/_5mdp"
+        android:layout_marginTop="@dimen/_3mdp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/user2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="@dimen/_50mdp"
+        android:layout_height="@dimen/_50mdp"
+        android:background="@drawable/image_background"
+        android:padding="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/profile_image"
+        app:layout_constraintEnd_toEndOf="@+id/profile_image"
+        app:layout_constraintStart_toStartOf="@+id/profile_image"
+        app:layout_constraintTop_toTopOf="@+id/profile_image" />
+
+    <TextView
+        android:id="@+id/userName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_13mdp"
+        android:layout_marginTop="@dimen/_5mdp"
+        android:text="Alica Adams"
+        android:textColor="@color/gray1"
+        android:textSize="@dimen/_15asp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/profile_image"
+        app:layout_constraintTop_toTopOf="@+id/profile_image" />
+
+    <TextView
+        android:id="@+id/userBio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_13mdp"
+        android:layout_marginBottom="@dimen/_4mdp"
+        android:fontFamily="@font/acme"
+        android:text="Traveler, Life Lover"
+        android:textColor="@color/gray2"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/profile_image"
+        app:layout_constraintStart_toEndOf="@+id/profile_image"
+        app:layout_constraintTop_toBottomOf="@+id/userName"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/postMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_44mdp"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
+        android:layout_marginEnd="@dimen/_5mdp"
+        app:layout_constraintBottom_toBottomOf="@+id/profile_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/profile_image"
+        app:srcCompat="@drawable/ic_post_menu" />
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/post_image"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_200mdp"
+        android:layout_marginTop="@dimen/_17mdp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/gradient"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_image"
+        app:riv_corner_radius="10dip"
+        app:riv_mutate_background="true" />
+
+    <ImageView
+        android:id="@+id/savePost"
+        android:layout_width="@dimen/_26mdp"
+        android:layout_height="@dimen/_26mdp"
+        android:layout_marginEnd="@dimen/_5mdp"
+        app:layout_constraintBottom_toBottomOf="@+id/post_share"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/post_share"
+        app:srcCompat="@drawable/ic_save_post" />
+
+    <TextView
+        android:id="@+id/post_like"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_4mdp"
+        android:layout_marginTop="@dimen/_18mdp"
+        android:drawablePadding="3dp"
+        android:gravity="center_vertical"
+        android:text="312"
+        app:drawableStartCompat="@drawable/like_empty"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/post_image" />
+
+    <TextView
+        android:id="@+id/post_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_19mdp"
+        android:drawablePadding="3dp"
+        android:gravity="center_vertical"
+        android:text="202"
+        app:drawableStartCompat="@drawable/ic_comment"
+        app:drawableTint="@color/gray1"
+        app:layout_constraintBottom_toBottomOf="@+id/post_like"
+        app:layout_constraintStart_toEndOf="@+id/post_like"
+        app:layout_constraintTop_toTopOf="@+id/post_like"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/post_share"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_19mdp"
+        android:drawablePadding="3dp"
+        android:gravity="center_vertical"
+        app:drawableTint="@color/gray1"
+        android:text="103"
+        app:drawableStartCompat="@drawable/postshare"
+        app:layout_constraintBottom_toBottomOf="@+id/post_comment"
+        app:layout_constraintStart_toEndOf="@+id/post_comment"
+        app:layout_constraintTop_toTopOf="@+id/post_comment"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="@dimen/_20mdp"
+        android:background="@color/gray2"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/post_like" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

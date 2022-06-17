@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs xmlns:android="http://schemas.android.com/apk/res/android">
+    <tab
+        drawable="@drawable/ic_home"
+        text="@string/home_nav" />
+    <tab
+        drawable="@drawable/ic_feed"
+        text="@string/feed_nav" />
+    <tab
+        drawable="@drawable/ic_shop"
+        text="@string/shop_nav" />
+    <tab
+        drawable="@drawable/ic_cart"
+        text="@string/cart_nav"/>
+    <tab
+        drawable="@drawable/ic_chat"
+        text="@string/chat_nav" />
+    <tab
+        drawable="@drawable/ic_person2"
+        text="@string/profile_nav" />
+</tabs>
