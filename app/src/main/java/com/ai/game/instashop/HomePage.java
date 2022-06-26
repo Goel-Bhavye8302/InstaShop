@@ -69,6 +69,7 @@ public class HomePage extends AppCompatActivity implements ChipNavigationBar.OnI
                 findViewById(R.id.profile_logout).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        // TODO : Add code for logout
                         Toast.makeText(HomePage.this, "Working!!!", Toast.LENGTH_SHORT).show();
                         slidingPane.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
                     }
