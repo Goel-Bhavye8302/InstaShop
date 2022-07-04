@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">InstaShop</string>
-    <string name="back4app_server_url">https://parseapi.back4app.com/</string>
+
+
     <!-- Change the following strings as required -->
-    <string name="back4app_app_id">GkKXL0gtqRlaIjcDTGstP9rWTw3XMoXte0id7IEn</string>
-    <string name="back4app_client_key">Jh6honSs8oNaNtpY49KRpIK6NpGAhffnZAexKucu</string>
+
 
     <string name="signup_button"><u>SIGN-UP</u></string>
     <string name="login_button"><u>LOG-IN</u></string>
@@ -12,7 +12,7 @@
     <string name="home_nav">Home</string>
     <string name="feed_nav">Feed</string>
     <string name="shop_nav">Shop</string>
-    <string name="chat_nav">Chat</string>
+    <string name="notify_nav">Notifications</string>
     <string name="profile_nav">Profile</string>
     <string name="cart_nav">Cart</string>
     <!-- TODO: Remove or change this placeholder text -->

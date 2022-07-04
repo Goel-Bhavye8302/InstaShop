@@ -31,9 +31,9 @@
 <!--        app:cnb_iconColor="@color/red2"-->
 <!--        app:cnb_textColor="@color/black"/>-->
     <item
-        android:id="@+id/chat"
-        android:icon="@drawable/ic_chat"
-        android:title="@string/chat_nav"
+        android:id="@+id/notify"
+        android:icon="@drawable/ic_notification"
+        android:title="@string/notify_nav"
         app:cnb_backgroundColor="#FAE2E2"
         app:cnb_iconColor="@color/red2"
         app:cnb_textColor="@color/black"/>

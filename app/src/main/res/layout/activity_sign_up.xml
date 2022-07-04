@@ -9,14 +9,14 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="@dimen/_231mdp"
-        android:layout_height="@dimen/_37mdp"
-        android:layout_marginTop="@dimen/_13mdp"
-        android:layout_marginBottom="@dimen/_71mdp"
+        android:layout_width="@dimen/_231sdp"
+        android:layout_height="@dimen/_37sdp"
+        android:layout_marginTop="@dimen/_13sdp"
+        android:layout_marginBottom="@dimen/_71sdp"
         android:background="@drawable/button_background"
+        android:fontFamily="@font/contrail_one"
         android:onClick="signUp"
         android:text="SIGN-UP"
-        android:fontFamily="@font/contrail_one"
         android:textColor="@color/white"
         android:textSize="@dimen/_18asp"
         app:cornerRadius="4dp"
@@ -25,67 +25,91 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword2"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <EditText
         android:id="@+id/editTextTextPersonName"
-        android:layout_width="@dimen/_231mdp"
-        android:layout_height="@dimen/_37mdp"
-        android:layout_marginTop="@dimen/_234mdp"
+        android:layout_width="@dimen/_231sdp"
+        android:layout_height="@dimen/_37sdp"
+        android:layout_marginTop="@dimen/_234sdp"
         android:background="@drawable/edittext_background"
         android:drawableStart="@drawable/ic_person"
         android:drawablePadding="12dp"
         android:ems="10"
-        android:hint="Name"
         android:fontFamily="@font/contrail_one"
-        android:inputType="textEmailAddress"
+        android:hint="Name"
+        android:inputType="textPersonName"
         android:paddingHorizontal="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <EditText
         android:id="@+id/editTextTextEmailAddress"
-        android:layout_width="@dimen/_231mdp"
-        android:layout_height="@dimen/_37mdp"
-        android:layout_marginTop="@dimen/_13mdp"
+        android:layout_width="@dimen/_231sdp"
+        android:layout_height="@dimen/_37sdp"
+        android:layout_marginTop="@dimen/_13sdp"
         android:background="@drawable/edittext_background"
         android:drawableStart="@drawable/ic_email"
         android:drawablePadding="12dp"
         android:ems="10"
-        android:hint="Email"
         android:fontFamily="@font/contrail_one"
+        android:hint="Email"
         android:inputType="textEmailAddress"
         android:paddingHorizontal="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <EditText
+        android:id="@+id/editTextProfession"
+        android:layout_width="@dimen/_231sdp"
+        android:layout_height="@dimen/_37sdp"
+        android:layout_marginTop="@dimen/_13sdp"
+        android:background="@drawable/edittext_background"
+        android:drawableStart="@drawable/profession"
+        android:drawablePadding="12dp"
+        android:drawableTint="#89000000"
+        android:ems="10"
+        android:fontFamily="@font/contrail_one"
+        android:inputType="textPersonName"
+        android:hint="Profession"
+        android:paddingHorizontal="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <EditText
         android:id="@+id/editTextTextPassword"
-        android:layout_width="@dimen/_231mdp"
-        android:layout_height="@dimen/_37mdp"
-        android:layout_marginTop="@dimen/_13mdp"
+        android:layout_width="@dimen/_231sdp"
+        android:layout_height="@dimen/_37sdp"
+        android:layout_marginTop="@dimen/_13sdp"
         android:background="@drawable/edittext_background"
         android:drawableStart="@drawable/ic_lock"
         android:drawablePadding="12dp"
         android:ems="10"
-        android:hint="Password"
         android:fontFamily="@font/contrail_one"
+        android:hint="Password"
         android:inputType="textPassword"
-        android:paddingHorizontal="10dp"
         android:longClickable="false"
+        android:paddingHorizontal="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextProfession"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="@dimen/_161mdp"
-        android:layout_height="@dimen/_23mdp"
+        android:layout_width="@dimen/_161sdp"
+        android:layout_height="@dimen/_23sdp"
         android:fontFamily="@font/contrail_one"
         android:gravity="center|end"
         android:paddingEnd="7dp"
@@ -102,10 +126,10 @@
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="@dimen/_62mdp"
-        android:layout_height="@dimen/_23mdp"
-        android:layout_marginTop="@dimen/_13mdp"
-        android:layout_marginEnd="@dimen/_46mdp"
+        android:layout_width="@dimen/_62sdp"
+        android:layout_height="@dimen/_23sdp"
+        android:layout_marginTop="@dimen/_13sdp"
+        android:layout_marginEnd="@dimen/_46sdp"
         android:background="#00FFFFFF"
         android:fontFamily="@font/contrail_one"
         android:gravity="start"
@@ -124,7 +148,7 @@
     <TextView
         android:id="@+id/textView3"
         android:layout_width="0dp"
-        android:layout_height="@dimen/_154mdp"
+        android:layout_height="@dimen/_154sdp"
         android:background="@color/gray1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -135,8 +159,8 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="@dimen/_217mdp"
-        android:layout_height="@dimen/_149mdp"
+        android:layout_width="@dimen/_217sdp"
+        android:layout_height="@dimen/_149sdp"
         android:scaleX="1.25"
         android:scaleY="1.45"
         app:layout_constraintBottom_toTopOf="@+id/editTextTextEmailAddress"
@@ -149,29 +173,30 @@
 
     <EditText
         android:id="@+id/editTextTextPassword2"
-        android:layout_width="@dimen/_231mdp"
-        android:layout_height="@dimen/_37mdp"
-        android:layout_marginTop="@dimen/_13mdp"
+        android:layout_width="@dimen/_231sdp"
+        android:layout_height="@dimen/_37sdp"
+        android:layout_marginTop="@dimen/_13sdp"
         android:background="@drawable/edittext_background"
         android:drawableStart="@drawable/ic_lock"
         android:drawablePadding="12dp"
         android:ems="10"
-        android:longClickable="false"
-        android:hint="Confirm Password"
         android:fontFamily="@font/contrail_one"
+        android:hint="Confirm Password"
         android:inputType="textPassword"
+        android:longClickable="false"
         android:paddingHorizontal="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <ImageView
         android:id="@+id/passwordVisibility"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="12dp"
+        android:layout_marginTop="@dimen/_9mdp"
+        android:layout_marginEnd="@dimen/_9mdp"
         android:onClick="togglePasswordVisibility"
         app:layout_constraintBottom_toBottomOf="@+id/editTextTextPassword"
         app:layout_constraintEnd_toEndOf="@+id/editTextTextPassword"
@@ -179,14 +204,15 @@
         app:layout_constraintStart_toStartOf="@+id/editTextTextPassword"
         app:layout_constraintTop_toTopOf="@+id/editTextTextPassword"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/ic_password_invisible" />
+        app:srcCompat="@drawable/ic_password_invisible"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageView
         android:id="@+id/passwordVisibility2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="12dp"
+        android:layout_marginTop="@dimen/_9mdp"
+        android:layout_marginEnd="@dimen/_9mdp"
         android:onClick="togglePasswordVisibility2"
         app:layout_constraintBottom_toBottomOf="@+id/editTextTextPassword2"
         app:layout_constraintEnd_toEndOf="@+id/editTextTextPassword2"
@@ -194,6 +220,7 @@
         app:layout_constraintStart_toStartOf="@+id/editTextTextPassword2"
         app:layout_constraintTop_toTopOf="@+id/editTextTextPassword2"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/ic_password_invisible" />
+        app:srcCompat="@drawable/ic_password_invisible"
+        tools:ignore="TouchTargetSizeCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

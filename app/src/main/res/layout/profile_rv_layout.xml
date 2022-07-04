@@ -7,9 +7,9 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_image"
-        android:layout_width="@dimen/_55mdp"
-        android:layout_height="@dimen/_55mdp"
-        android:layout_marginEnd="@dimen/_15mdp"
+        android:layout_width="@dimen/_60sdp"
+        android:layout_height="@dimen/_60sdp"
+        android:layout_marginEnd="@dimen/_11sdp"
         android:scaleType="centerCrop"
         android:src="@drawable/gradient"
         app:civ_border_width="2dp"

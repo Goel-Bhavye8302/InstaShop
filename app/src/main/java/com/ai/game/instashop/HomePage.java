@@ -11,12 +11,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
-import com.ai.game.instashop.Fragment.ChatFragment;
+import com.ai.game.instashop.Fragment.NotifyFragment;
 import com.ai.game.instashop.Fragment.HomeFragment;
 import com.ai.game.instashop.Fragment.ProfileFragment;
 import com.ai.game.instashop.Fragment.ShopFragment;
+import com.google.firebase.auth.FirebaseAuth;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
@@ -69,8 +69,11 @@ public class HomePage extends AppCompatActivity implements ChipNavigationBar.OnI
                 findViewById(R.id.profile_logout).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(HomePage.this, "Working!!!", Toast.LENGTH_SHORT).show();
+                        FirebaseAuth.getInstance().signOut();
+                        Toast.makeText(HomePage.this, "Logged-Out", Toast.LENGTH_SHORT).show();
                         slidingPane.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
+                        Intent intent = new Intent(HomePage.this, MainActivity.class);
+                        startActivity(intent);
                     }
                 });
                 slidingPane.setFadeOnClickListener(new View.OnClickListener() {
@@ -102,9 +105,9 @@ public class HomePage extends AppCompatActivity implements ChipNavigationBar.OnI
                 findViewById(R.id.toolbar).setVisibility(View.GONE);
                 fragment = new HomeFragment();
                 break;
-            case R.id.chat:
+            case R.id.notify:
                 findViewById(R.id.toolbar).setVisibility(View.GONE);
-                fragment = new ChatFragment();
+                fragment = new NotifyFragment();
                 break;
             case R.id.shop:
                 findViewById(R.id.toolbar).setVisibility(View.GONE);

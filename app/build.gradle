@@ -35,8 +35,6 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
-    implementation "com.github.parse-community.Parse-SDK-Android:parse:3.0.0"
-
     // Design Library for Coordinator layout and Toolbars
     implementation 'com.google.android.material:material:1.6.1'
 
@@ -50,6 +48,8 @@ dependencies {
     // Dynamic Sizes Library
     implementation 'com.github.MrNouri:DynamicSizes:1.0'
     implementation 'com.auto.adjust:dimens:1.0.9'
+    implementation 'com.intuit.sdp:sdp-android:1.1.0'
+    implementation 'com.intuit.ssp:ssp-android:1.0.6'
 
     // Rounded Image View
     implementation 'com.makeramen:roundedimageview:2.3.0'
@@ -59,6 +59,18 @@ dependencies {
 
     // Sliding Up Panel
     implementation 'com.sothree.slidinguppanel:library:3.4.0'
+
+    // Import the BoM for the Firebase platform
+    implementation platform('com.google.firebase:firebase-bom:30.1.0')
+
+    // Declare the dependency for the Firebase Authentication library
+    implementation 'com.google.firebase:firebase-auth'
+
+    // Declare the dependency for the Realtime Database library
+    implementation 'com.google.firebase:firebase-database'
+
+    // Declare the dependency for the Google Play services library
+    implementation 'com.google.android.gms:play-services-auth:20.2.0'
 }
 
 repositories {
@@ -67,3 +79,5 @@ repositories {
     jcenter()
     maven { url 'https://jitpack.io' }
 }
+
+apply plugin: 'com.google.gms.google-services'  // Google Services plugin

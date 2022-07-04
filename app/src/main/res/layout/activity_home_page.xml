@@ -21,7 +21,7 @@
         <com.ismaeldivita.chipnavigation.ChipNavigationBar
             android:id="@+id/navbar"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_47mdp"
+            android:layout_height="@dimen/_47sdp"
             android:background="@color/red2"
             app:cnb_menuResource="@menu/navbar_menu"
             app:cnb_unselectedColor="@color/white1"
@@ -67,8 +67,8 @@
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/imageView1"
-            android:layout_width="@dimen/_60mdp"
-            android:layout_height="@dimen/_4mdp"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_4sdp"
             android:layout_marginTop="8dp"
             android:scaleType="centerCrop"
             android:src="@color/gray2"

@@ -26,19 +26,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.parse.FindCallback;
-import com.parse.GetCallback;
-import com.parse.LogInCallback;
-import com.parse.LogOutCallback;
-import com.parse.Parse;
-import com.parse.ParseAnalytics;
-import com.parse.ParseException;
-import com.parse.ParseInstallation;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
-import com.parse.ParseUser;
-import com.parse.SaveCallback;
-import com.parse.SignUpCallback;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 
 import java.util.List;
 
@@ -46,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
     public EditText eMail, password;
     public ImageView togglePasswordVisibility;
     public Boolean passwordVisible = false;
+
+    private FirebaseAuth mAuth;
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
@@ -65,16 +60,24 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null){
+            Intent intent = new Intent(getApplicationContext(), HomePage.class);
+            startActivity(intent);
+            Toast.makeText(this, "Welcome", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if(ParseUser.getCurrentUser() != null){
-            Intent intent = new Intent(getApplicationContext(), HomePage.class);
-            startActivity(intent);
-            Toast.makeText(this, ParseUser.getCurrentUser().getUsername(), Toast.LENGTH_SHORT).show();
-//            finish();
-        }
+        mAuth = FirebaseAuth.getInstance();
+
         eMail = findViewById(R.id.editTextTextEmailAddress);
         password = findViewById(R.id.editTextTextPassword);
         togglePasswordVisibility = findViewById(R.id.passwordVisibility);
@@ -97,7 +100,6 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
             public void afterTextChanged(Editable s) {
             }
         });
-        ParseAnalytics.trackAppOpenedInBackground(getIntent());
     }
 
     public void togglePasswordVisibility(View v) {
@@ -135,22 +137,28 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
             }
         }
         else{
-            ParseUser.logInInBackground(eMail.getText().toString(), password.getText().toString(), new LogInCallback() {
-                @Override
-                public void done(ParseUser user, ParseException e) {
-                    if(e == null && user != null){
-                        Intent intent = new Intent(getApplicationContext(), HomePage.class);
-                        startActivity(intent);
-                        Toast.makeText(getApplicationContext(), "Welcome!", Toast.LENGTH_SHORT).show();
-//                        showAlert("Login Successful", "Welcome!", false);
-                    }
-                    else {
-                        ParseUser.logOut();
-                        e.printStackTrace();
-                        showAlert("Login Fail", e.getMessage() + " Please try again", true);
-                    }
-                }
-            });
+            mAuth.signInWithEmailAndPassword(eMail.getText().toString(), password.getText().toString())
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                if(user != null && user.isEmailVerified()){
+                                    showAlert("Login Successful", "Welcome!", false);
+                                    Intent intent = new Intent(getApplicationContext(), HomePage.class);
+                                    startActivity(intent);
+                                    Toast.makeText(getApplicationContext(), "Welcome!", Toast.LENGTH_SHORT).show();
+                                }
+                                else {
+                                    showAlert("Login Fail", "Email not verified!" + " Please try again", true);
+                                }
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                showAlert("Login Fail", task.getException().getMessage() + " Please try again", true);
+                            }
+                        }
+                    });
         }
     }
 

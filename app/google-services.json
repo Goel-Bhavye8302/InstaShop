@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1058063245167",
+    "project_id": "instashop-ea3ac",
+    "storage_bucket": "instashop-ea3ac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1058063245167:android:fb2705473a7e6eb559529a",
+        "android_client_info": {
+          "package_name": "com.ai.game.instashop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1058063245167-r1sinufh0fp8tcvdfmch5946ktp0chil.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDj0wTNlV-ckVZOeJKi9z9DkRn30tOB9iI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1058063245167-r1sinufh0fp8tcvdfmch5946ktp0chil.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

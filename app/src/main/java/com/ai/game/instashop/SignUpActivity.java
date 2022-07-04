@@ -1,5 +1,6 @@
 package com.ai.game.instashop;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,17 +21,24 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.parse.ParseAnalytics;
-import com.parse.ParseException;
-import com.parse.ParseUser;
-import com.parse.SignUpCallback;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnKeyListener{
-    public EditText name, eMail, password, confirmPassword;
+    public EditText name, eMail, profession, password, confirmPassword;
     public ImageView togglePasswordVisibility;
     public ImageView togglePasswordVisibility2;
     public Boolean passwordVisible = false;
     public Boolean passwordVisible2 = false;
+
+    private FirebaseAuth mAuth;
+    private FirebaseDatabase database;
 
     @Override
     public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -54,8 +62,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnKeyListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
+        mAuth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
+
         name = findViewById(R.id.editTextTextPersonName);
         eMail = findViewById(R.id.editTextTextEmailAddress);
+        profession = findViewById(R.id.editTextProfession);
         password = findViewById(R.id.editTextTextPassword);
         confirmPassword = findViewById(R.id.editTextTextPassword2);
         togglePasswordVisibility = findViewById(R.id.passwordVisibility);
@@ -96,7 +108,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnKeyListe
         });
 
         confirmPassword.setOnKeyListener(this);
-        ParseAnalytics.trackAppOpenedInBackground(getIntent());
     }
 
     public void logIn(View view){
@@ -112,6 +123,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnKeyListe
                     // don't forget to change the line below with the names of your Activities
                     if (!error) {
                         Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+                        mAuth.signOut();
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                     }
@@ -121,9 +133,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnKeyListe
     }
 
     public void signUp(View view){
-        if(TextUtils.isEmpty(name.getText()) || TextUtils.isEmpty(eMail.getText()) || TextUtils.isEmpty(password.getText()) || TextUtils.isEmpty(confirmPassword.getText())) {
+        if(TextUtils.isEmpty(name.getText()) || TextUtils.isEmpty(eMail.getText()) || TextUtils.isEmpty(profession.getText()) || TextUtils.isEmpty(password.getText()) || TextUtils.isEmpty(confirmPassword.getText())) {
             if(TextUtils.isEmpty(eMail.getText())) eMail.setError("Email-Id Required");
             if(TextUtils.isEmpty(name.getText())) name.setError("Name Required");
+            if(TextUtils.isEmpty(profession.getText())) profession.setError("Profession Required");
             if(TextUtils.isEmpty(password.getText())) {
                 password.setError("Password Required");
                 togglePasswordVisibility.setVisibility(View.INVISIBLE);
@@ -136,28 +149,41 @@ public class SignUpActivity extends AppCompatActivity implements View.OnKeyListe
         else if(!password.getText().toString().equals(confirmPassword.getText().toString()))
             Toast.makeText(getApplicationContext(), "Password Mismatch", Toast.LENGTH_SHORT).show();
 
-        else{
-            ParseUser user = new ParseUser();
-            user.setUsername(name.getText().toString().trim());
-            user.setEmail(eMail.getText().toString().trim());
-            user.setPassword(password.getText().toString());
-            user.put("Name", name.getText().toString().trim());
-            user.saveInBackground();
-            user.signUpInBackground(new SignUpCallback() {
-                @Override
-                public void done(ParseException e) {
-                    if(e == null){
-//                        Toast.makeText(getApplicationContext(), "Sign-Up Successful", Toast.LENGTH_SHORT).show();
-                        showAlert("Account Created Successfully!", "Please verify your email before Login", false);
-                    }
-                    else {
-                        ParseUser.logOut();
-//                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                        showAlert("Error Account Creation failed", "Account could not be created" + " :" + e.getMessage(), true);
-                        e.printStackTrace();
-                    }
-                }
-            });
+        else {
+            mAuth.createUserWithEmailAndPassword(eMail.getText().toString().trim(), password.getText().toString().trim())
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Firebase_User user = new Firebase_User(
+                                        name.getText().toString(),
+                                        eMail.getText().toString(),
+                                        profession.getText().toString(),
+                                        password.getText().toString()
+                                );
+                                String uid = task.getResult().getUser().getUid();
+                                database.getReference().child("Users").child(uid).setValue(user);
+                                if(mAuth.getCurrentUser() != null){
+                                    mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if(task.isSuccessful()){
+                                                Toast.makeText(SignUpActivity.this, "Verification Email sent!", Toast.LENGTH_SHORT).show();
+                                                showAlert("Account Created Successfully!", "Please verify your email before Login", false);
+                                            }
+                                            else{
+                                                showAlert("error!", task.getException().getMessage(), true);
+                                            }
+                                        }
+                                    });
+                                }
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                showAlert("Error : Account Creation failed", "Account could not be created" + " :" + task.getException().getMessage(), true);
+                            }
+                        }
+                    });
         }
     }
 
