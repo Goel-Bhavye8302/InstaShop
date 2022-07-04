@@ -171,4 +171,6 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
         Intent intent = new Intent(getApplicationContext(), ResetPasswordActivity.class);
         startActivity(intent);
     }
+
+    // testing
 }
