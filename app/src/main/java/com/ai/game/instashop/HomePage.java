@@ -1,9 +1,5 @@
 package com.ai.game.instashop;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,8 +8,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.ai.game.instashop.Fragment.NotifyFragment;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
 import com.ai.game.instashop.Fragment.HomeFragment;
+import com.ai.game.instashop.Fragment.NotifyFragment;
 import com.ai.game.instashop.Fragment.ProfileFragment;
 import com.ai.game.instashop.Fragment.ShopFragment;
 import com.google.firebase.auth.FirebaseAuth;
@@ -58,30 +58,14 @@ public class HomePage extends AppCompatActivity implements ChipNavigationBar.OnI
 
         slidingPane = findViewById(R.id.sliding_layout);
 
-        slidingPane.addPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
+        findViewById(R.id.profile_logout).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onPanelSlide(View panel, float slideOffset) {
-
-            }
-
-            @Override
-            public void onPanelStateChanged(View panel, SlidingUpPanelLayout.PanelState previousState, SlidingUpPanelLayout.PanelState newState) {
-                findViewById(R.id.profile_logout).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        FirebaseAuth.getInstance().signOut();
-                        Toast.makeText(HomePage.this, "Logged-Out", Toast.LENGTH_SHORT).show();
-                        slidingPane.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
-                        Intent intent = new Intent(HomePage.this, MainActivity.class);
-                        startActivity(intent);
-                    }
-                });
-                slidingPane.setFadeOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        slidingPane.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
-                    }
-                });
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                Toast.makeText(HomePage.this, "Logged-Out", Toast.LENGTH_SHORT).show();
+                slidingPane.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
+                Intent intent = new Intent(HomePage.this, MainActivity.class);
+                startActivity(intent);
             }
         });
     }

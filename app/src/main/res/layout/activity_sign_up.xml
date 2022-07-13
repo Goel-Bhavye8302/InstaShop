@@ -77,8 +77,8 @@
         android:drawableTint="#89000000"
         android:ems="10"
         android:fontFamily="@font/contrail_one"
-        android:inputType="textPersonName"
         android:hint="Profession"
+        android:inputType="textPersonName"
         android:paddingHorizontal="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.505"
@@ -222,5 +222,17 @@
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/ic_password_invisible"
         tools:ignore="TouchTargetSizeCheck" />
+
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.908" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.ai.game.instashop;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,8 +12,14 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ProgressBar;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.security.Key;
 import java.util.ArrayList;
@@ -20,7 +27,7 @@ import java.util.List;
 
 public class ResetPasswordActivity extends AppCompatActivity implements View.OnKeyListener {
     public EditText email;
-    boolean emailFound;
+    ProgressBar progressBar;
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
@@ -45,6 +52,7 @@ public class ResetPasswordActivity extends AppCompatActivity implements View.OnK
         setContentView(R.layout.activity_reset_password);
 
         email = findViewById(R.id.editTextTextEmailAddress);
+        progressBar = findViewById(R.id.resetPassword_progressbar);
 
         email.setOnKeyListener(this);
     }
@@ -69,31 +77,25 @@ public class ResetPasswordActivity extends AppCompatActivity implements View.OnK
     public void resetPassword(View view){
         if(TextUtils.isEmpty(email.getText())) email.setError("Email-Id Required");
         else {
-//            ParseQuery<ParseUser> query = ParseUser.getQuery();
-//            query.whereEqualTo("email", email.getText().toString());
-//            query.findInBackground(new FindCallback<ParseUser>() {
-//                @Override
-//                public void done(List<ParseUser> objects, ParseException e) {
-//                    if(e == null && objects.size() > 0){
-//                        ParseUser.requestPasswordResetInBackground(email.getText().toString(), new RequestPasswordResetCallback() {
-//                            public void done(ParseException e) {
-//                                if (e == null) {
-//                                    // An email was successfully sent with reset instructions.
-//                                    showAlert("Email Sent!", "An email was successfully sent to " + email.getText().toString() + " with reset instructions.", false);
-//                                } else {
-//                                    // Something went wrong. Look at the ParseException to see what's up.
-//                                    showAlert("Error Password Reset failed", "Something went wrong" + " :" + e.getMessage(), true);
-//                                    e.printStackTrace();
-//                                }
-//                            }
-//                        });
-//                    }
-//                    else{
-//                        showAlert("Error Password Reset failed", "Something went wrong" + " : Email not found.", true);
-//                    }
-//                }
-//            });
-        }
+            progressBar.setVisibility(View.VISIBLE);
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
 
+            FirebaseAuth.getInstance().sendPasswordResetEmail(email.getText().toString().trim())
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                // An email was successfully sent with reset instructions.
+                                showAlert("Email Sent!", "An email was successfully sent to " + email.getText().toString() + " with reset instructions.", false);
+                            }
+                            else{
+                                // Something went wrong. Look at the ParseException to see what's up.
+                                showAlert("Error Password Reset failed", "Something went wrong" + " :" + task.getException().getMessage(), true);
+                            }
+                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                            progressBar.setVisibility(View.GONE);
+                        }
+                    });
+        }
     }
 }

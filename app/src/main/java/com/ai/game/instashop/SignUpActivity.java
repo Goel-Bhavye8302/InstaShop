@@ -12,22 +12,21 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.ai.game.instashop.Model.Firebase_User;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnKeyListener{
@@ -133,6 +132,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnKeyListe
     }
 
     public void signUp(View view){
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         if(TextUtils.isEmpty(name.getText()) || TextUtils.isEmpty(eMail.getText()) || TextUtils.isEmpty(profession.getText()) || TextUtils.isEmpty(password.getText()) || TextUtils.isEmpty(confirmPassword.getText())) {
             if(TextUtils.isEmpty(eMail.getText())) eMail.setError("Email-Id Required");
             if(TextUtils.isEmpty(name.getText())) name.setError("Name Required");
@@ -145,11 +145,17 @@ public class SignUpActivity extends AppCompatActivity implements View.OnKeyListe
                 confirmPassword.setError("Confirm Password Required");
                 togglePasswordVisibility2.setVisibility(View.INVISIBLE);
             }
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         }
-        else if(!password.getText().toString().equals(confirmPassword.getText().toString()))
+        else if(!password.getText().toString().equals(confirmPassword.getText().toString())) {
             Toast.makeText(getApplicationContext(), "Password Mismatch", Toast.LENGTH_SHORT).show();
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        }
 
         else {
+            ProgressBar bar = findViewById(R.id.progressBar2);
+            bar.setVisibility(View.VISIBLE);
+
             mAuth.createUserWithEmailAndPassword(eMail.getText().toString().trim(), password.getText().toString().trim())
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
@@ -168,17 +174,24 @@ public class SignUpActivity extends AppCompatActivity implements View.OnKeyListe
                                     mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
+                                            bar.setVisibility(View.GONE);
+                                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
                                             if(task.isSuccessful()){
                                                 Toast.makeText(SignUpActivity.this, "Verification Email sent!", Toast.LENGTH_SHORT).show();
-                                                showAlert("Account Created Successfully!", "Please verify your email before Login", false);
+                                                showAlert("Account Created Successfully!", "Please verify your email before Login. Please check your spam folder for verification email.", false);
                                             }
                                             else{
                                                 showAlert("error!", task.getException().getMessage(), true);
                                             }
+                                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                                         }
                                     });
                                 }
                             } else {
+                                bar.setVisibility(View.GONE);
+                                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
                                 // If sign in fails, display a message to the user.
                                 showAlert("Error : Account Creation failed", "Account could not be created" + " :" + task.getException().getMessage(), true);
                             }
@@ -214,5 +227,13 @@ public class SignUpActivity extends AppCompatActivity implements View.OnKeyListe
             confirmPassword.setSelection(confirmPassword.getText().length());
             passwordVisible2 = false;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+        mAuth.signOut();
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 }

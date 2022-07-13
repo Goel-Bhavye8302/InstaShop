@@ -20,9 +20,11 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -67,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
         if(currentUser != null){
             Intent intent = new Intent(getApplicationContext(), HomePage.class);
             startActivity(intent);
-            Toast.makeText(this, "Welcome", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Welcome!", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -137,21 +139,30 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
             }
         }
         else{
+            ProgressBar bar = findViewById(R.id.progressBar);
+            bar.setVisibility(View.VISIBLE);
+
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
             mAuth.signInWithEmailAndPassword(eMail.getText().toString(), password.getText().toString())
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
+                            bar.setVisibility(View.GONE);
+                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 if(user != null && user.isEmailVerified()){
-                                    showAlert("Login Successful", "Welcome!", false);
+//                                    showAlert("Login Successful", "Welcome!", false);
                                     Intent intent = new Intent(getApplicationContext(), HomePage.class);
                                     startActivity(intent);
                                     Toast.makeText(getApplicationContext(), "Welcome!", Toast.LENGTH_SHORT).show();
                                 }
                                 else {
                                     showAlert("Login Fail", "Email not verified!" + " Please try again", true);
+                                    mAuth.signOut();
                                 }
                             } else {
                                 // If sign in fails, display a message to the user.
@@ -172,5 +183,11 @@ public class MainActivity extends AppCompatActivity implements View.OnKeyListene
         startActivity(intent);
     }
 
-    // testing
+    @Override
+    public void onBackPressed() {
+        Intent a = new Intent(Intent.ACTION_MAIN);
+        a.addCategory(Intent.CATEGORY_HOME);
+        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(a);
+    }
 }
