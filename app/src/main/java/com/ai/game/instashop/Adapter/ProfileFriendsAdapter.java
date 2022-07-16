@@ -10,9 +10,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ai.game.instashop.Model.Firebase_User;
 import com.ai.game.instashop.Model.ProfileFriendsModel;
 import com.ai.game.instashop.Model.StoryModel;
 import com.ai.game.instashop.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -36,7 +42,21 @@ public class ProfileFriendsAdapter extends RecyclerView.Adapter<ProfileFriendsAd
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ProfileFriendsModel friendsModel = friendsModelList.get(position);
-        holder.profile.setImageResource(friendsModel.getProfile_image());
+        FirebaseDatabase.getInstance().getReference()
+                .child("Users")
+                .child(friendsModel.getFollowedById())
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Firebase_User user = snapshot.getValue(Firebase_User.class);
+                        Picasso.get().load(user.getProfilePhoto()).placeholder(R.drawable.user2).into(holder.profile);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
     }
 
     @Override

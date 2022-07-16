@@ -1,17 +1,25 @@
 package com.ai.game.instashop.Model;
 
 public class ProfileFriendsModel {
-    int profile_image;
+    String followedById;
+    long followedAtTime;
 
-    public ProfileFriendsModel(int profile_image) {
-        this.profile_image = profile_image;
+    public ProfileFriendsModel() {
     }
 
-    public int getProfile_image() {
-        return profile_image;
+    public String getFollowedById() {
+        return followedById;
     }
 
-    public void setProfile_image(int profile_image) {
-        this.profile_image = profile_image;
+    public void setFollowedById(String followedById) {
+        this.followedById = followedById;
+    }
+
+    public long getFollowedAtTime() {
+        return followedAtTime;
+    }
+
+    public void setFollowedAtTime(long followedAt) {
+        this.followedAtTime = followedAt;
     }
 }

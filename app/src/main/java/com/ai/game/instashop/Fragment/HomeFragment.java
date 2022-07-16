@@ -1,28 +1,21 @@
 package com.ai.game.instashop.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.ai.game.instashop.Adapter.PostAdapter;
-import com.ai.game.instashop.Adapter.StoryAdapter;
-import com.ai.game.instashop.Model.PostModel;
-import com.ai.game.instashop.Model.StoryModel;
-import com.ai.game.instashop.R;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
-import java.util.ArrayList;
+import com.ai.game.instashop.Activity.ChatActivity;
+import com.ai.game.instashop.Adapter.SearchFeedAdapter;
+import com.ai.game.instashop.R;
 
 public class HomeFragment extends Fragment {
 
-    RecyclerView storyRV, postRV;
-    ArrayList<StoryModel> storyModelList;
-    ArrayList<PostModel> postModelList;
+    ViewPager viewPager;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -40,45 +33,23 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        storyRV = view.findViewById(R.id.story_rv);
-        postRV = view.findViewById(R.id.post_rv);
+        viewPager = view.findViewById(R.id.HomeViewPager);
 
-        storyModelList = new ArrayList<>();
-        storyModelList.add(new StoryModel(R.drawable.gradient, R.drawable.user2, "Rahul"));
-        storyModelList.add(new StoryModel(R.drawable.gradient, R.drawable.user2, "Rahul"));
-        storyModelList.add(new StoryModel(R.drawable.gradient, R.drawable.user2, "Rahul"));
-        storyModelList.add(new StoryModel(R.drawable.gradient, R.drawable.user2, "Rahul"));
-        storyModelList.add(new StoryModel(R.drawable.gradient, R.drawable.user2, "Rahul"));
-        storyModelList.add(new StoryModel(R.drawable.gradient, R.drawable.user2, "Rahul"));
-        storyModelList.add(new StoryModel(R.drawable.gradient, R.drawable.user2, "Rahul"));
-        storyModelList.add(new StoryModel(R.drawable.gradient, R.drawable.user2, "Rahul"));
+        viewPager.setAdapter(new SearchFeedAdapter(getChildFragmentManager()));
+        view.findViewById(R.id.search).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewPager.setCurrentItem(1,true);
+            }
+        });
 
-        StoryAdapter adapter = new StoryAdapter(storyModelList, getContext());
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-
-        storyRV.setLayoutManager(linearLayoutManager);
-        storyRV.setNestedScrollingEnabled(false);
-        storyRV.setAdapter(adapter);
-
-        postModelList = new ArrayList<>();
-        postModelList.add(new PostModel(R.drawable.user2, R.drawable.gradient, R.drawable.ic_save_post,"Rahul", "Jai Hind", "3122", "200", "94"));
-        postModelList.add(new PostModel(R.drawable.user2, R.drawable.gradient, R.drawable.ic_save_post,"Rahul", "Jai Hind", "3122", "200", "94"));
-        postModelList.add(new PostModel(R.drawable.user2, R.drawable.gradient, R.drawable.ic_save_post,"Rahul", "Jai Hind", "3122", "200", "94"));
-        postModelList.add(new PostModel(R.drawable.user2, R.drawable.gradient, R.drawable.ic_save_post,"Rahul", "Jai Hind", "3122", "200", "94"));
-        postModelList.add(new PostModel(R.drawable.user2, R.drawable.gradient, R.drawable.ic_save_post,"Rahul", "Jai Hind", "3122", "200", "94"));
-        postModelList.add(new PostModel(R.drawable.user2, R.drawable.gradient, R.drawable.ic_save_post,"Rahul", "Jai Hind", "3122", "200", "94"));
-        postModelList.add(new PostModel(R.drawable.user2, R.drawable.gradient, R.drawable.ic_save_post,"Rahul", "Jai Hind", "3122", "200", "94"));
-        postModelList.add(new PostModel(R.drawable.user2, R.drawable.gradient, R.drawable.ic_save_post,"Rahul", "Jai Hind", "3122", "200", "94"));
-        postModelList.add(new PostModel(R.drawable.user2, R.drawable.gradient, R.drawable.ic_save_post,"Rahul", "Jai Hind", "3122", "200", "94"));
-        postModelList.add(new PostModel(R.drawable.user2, R.drawable.gradient, R.drawable.ic_save_post,"Rahul", "Jai Hind", "3122", "200", "94"));
-        postModelList.add(new PostModel(R.drawable.user2, R.drawable.gradient, R.drawable.ic_save_post,"Rahul", "Jai Hind", "3122", "200", "94"));
-
-        PostAdapter adapter1 = new PostAdapter(postModelList, getContext());
-        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-
-        postRV.setLayoutManager(linearLayoutManager1);
-        postRV.setNestedScrollingEnabled(false);
-        postRV.setAdapter(adapter1);
+        view.findViewById(R.id.chat).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), ChatActivity.class);
+                startActivity(intent);
+            }
+        });
 
         return view;
     }

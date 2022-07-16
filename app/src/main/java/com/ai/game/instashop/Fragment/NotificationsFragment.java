@@ -33,7 +33,7 @@ public class NotificationsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_notifications, container, false);
 
-        RecyclerView recyclerView = view.findViewById(R.id.notification_rv);
+        recyclerView = view.findViewById(R.id.notification_rv);
         list = new ArrayList<>();
         list.add(new NotificationModel(R.drawable.gradient, "<b>Mukul</b> mentioned you in a story!", "just now"));
         list.add(new NotificationModel(R.drawable.gradient, "<b>Mukul</b> mentioned you in a story! Send a Message?", "just now"));
