@@ -1,4 +1,4 @@
-package com.ai.game.instashop;
+package com.ai.game.instashop.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -23,6 +23,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.ai.game.instashop.Model.Firebase_User;
+import com.ai.game.instashop.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;

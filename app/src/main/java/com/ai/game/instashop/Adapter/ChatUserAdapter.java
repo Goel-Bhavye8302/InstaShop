@@ -11,13 +11,21 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ai.game.instashop.Model.ChatUserModel;
 import com.ai.game.instashop.Model.Firebase_User;
 import com.ai.game.instashop.R;
-import com.ai.game.instashop.UserChattingActivity;
+import com.ai.game.instashop.Activity.UserChattingActivity;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class ChatUserAdapter extends RecyclerView.Adapter<ChatUserAdapter.ViewHolder>{
 
@@ -41,6 +49,29 @@ public class ChatUserAdapter extends RecyclerView.Adapter<ChatUserAdapter.ViewHo
         Firebase_User user = list.get(position);
         Picasso.get().load(user.getProfilePhoto()).placeholder(R.drawable.user2).into(holder.profile);
         holder.name.setText(user.getName());
+
+        FirebaseDatabase.getInstance().getReference().child("Chats")
+                .child(FirebaseAuth.getInstance().getUid() + user.getUid())
+                .orderByChild("timeStamp").limitToLast(1).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.exists()){
+                            for(DataSnapshot data : snapshot.getChildren()){
+                                holder.message.setText(data.child("message").getValue(String.class));
+
+                                DateFormat dateFormat = new SimpleDateFormat("hh:mm aa");
+                                String dateString = dateFormat.format(new Date(data.child("timeStamp").getValue(Long.class))).toString();
+
+                                holder.time.setText(dateString.toLowerCase(Locale.ROOT));
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

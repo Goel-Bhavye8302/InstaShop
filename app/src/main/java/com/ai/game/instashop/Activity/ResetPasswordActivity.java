@@ -1,4 +1,4 @@
-package com.ai.game.instashop;
+package com.ai.game.instashop.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -17,13 +16,10 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
+import com.ai.game.instashop.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-
-import java.security.Key;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ResetPasswordActivity extends AppCompatActivity implements View.OnKeyListener {
     public EditText email;

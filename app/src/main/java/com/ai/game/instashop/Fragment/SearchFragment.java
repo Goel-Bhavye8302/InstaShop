@@ -24,6 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class SearchFragment extends Fragment {
 
@@ -119,7 +120,7 @@ public class SearchFragment extends Fragment {
                                     if(user != null) user.setUid(data.getKey());
                                     if(!mAuth.getUid().toString().equals(user.getUid())){
                                         if(s.length() <= user.getName().length()
-                                                && user.getName().toString().contains(s))list.add(user);
+                                                && user.getName().toString().toLowerCase(Locale.ROOT).contains(s.toString().toLowerCase(Locale.ROOT)))list.add(user);
                                     }
                                 }
                                 adapter.notifyDataSetChanged();

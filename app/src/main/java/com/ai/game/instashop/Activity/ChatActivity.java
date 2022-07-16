@@ -1,9 +1,10 @@
-package com.ai.game.instashop;
+package com.ai.game.instashop.Activity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -15,16 +16,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ai.game.instashop.Adapter.ChatUserAdapter;
-import com.ai.game.instashop.Model.ChatUserModel;
 import com.ai.game.instashop.Model.Firebase_User;
+import com.ai.game.instashop.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class ChatActivity extends AppCompatActivity {
 
@@ -64,13 +65,15 @@ public class ChatActivity extends AppCompatActivity {
                 if(searchUser.getVisibility() == View.GONE){
                     searchUser.setVisibility(View.VISIBLE);
                     searchUser.requestFocus();
-                    InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                    inputMethodManager.toggleSoftInputFromWindow(findViewById(R.id.constraintLayout).getWindowToken(),InputMethodManager.SHOW_FORCED, 0 );
+
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
                 }
                 else {
                     searchUser.setVisibility(View.GONE);
-                    InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                    inputMethodManager.toggleSoftInputFromWindow(findViewById(R.id.constraintLayout).getWindowToken(),InputMethodManager.HIDE_IMPLICIT_ONLY, 0 );
+
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
                 }
             }
         });
@@ -119,6 +122,83 @@ public class ChatActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        searchUser.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                if(s.length() == 0){
+                    database.getReference().child("Users").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if(snapshot.exists()){
+                                list.clear();
+                                for(DataSnapshot data : snapshot.getChildren()){
+                                    Firebase_User user = data.getValue(Firebase_User.class);
+                                    if(user != null) user.setUid(data.getKey());
+                                    if(user.getUid().equals(mAuth.getUid())) continue;
+
+                                    for(DataSnapshot temp : data.child("Followers").getChildren()){
+                                        if(temp.exists() && temp.getKey().equals(mAuth.getUid())){
+                                            if(my_followers.contains(user.getUid())){
+                                                list.add(user);
+                                            }
+                                        }
+                                    }
+
+                                }
+                                adapter.notifyDataSetChanged();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }
+                else{
+                    database.getReference().child("Users").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if(snapshot.exists()){
+                                list.clear();
+                                for(DataSnapshot data : snapshot.getChildren()){
+                                    Firebase_User user = data.getValue(Firebase_User.class);
+                                    if(user != null) user.setUid(data.getKey());
+                                    if(user.getUid().equals(mAuth.getUid())) continue;
+
+                                    for(DataSnapshot temp : data.child("Followers").getChildren()){
+                                        if(temp.exists() && temp.getKey().equals(mAuth.getUid())){
+                                            if(my_followers.contains(user.getUid())){
+                                                if(s.length() <= user.getName().length()
+                                                        && user.getName().toString().toLowerCase(Locale.ROOT).contains(s.toString().toLowerCase(Locale.ROOT)))list.add(user);
+                                            }
+                                        }
+                                    }
+                                }
+                                adapter.notifyDataSetChanged();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
 
             }
         });

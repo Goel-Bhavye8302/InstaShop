@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import com.ai.game.instashop.Activity.ChatActivity;
 import com.ai.game.instashop.Adapter.SearchFeedAdapter;
-import com.ai.game.instashop.ChatActivity;
 import com.ai.game.instashop.R;
 
 public class HomeFragment extends Fragment {

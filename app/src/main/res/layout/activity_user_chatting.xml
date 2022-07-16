@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    tools:context=".UserChattingActivity">
+    android:background="@drawable/chat_background">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -68,11 +68,11 @@
 
     <EditText
         android:id="@+id/messageBox"
-        android:layout_width="300dp"
+        android:layout_width="310dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="10dp"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/edittext_background"
+        android:background="@drawable/send_message_edittext"
         android:ems="10"
         android:inputType="textMultiLine"
         android:maxHeight="120dp"
@@ -99,6 +99,8 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="15dp"
+        android:background="@color/transparent"
+        android:paddingBottom="5dp"
         app:layout_constraintBottom_toTopOf="@+id/messageBox"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

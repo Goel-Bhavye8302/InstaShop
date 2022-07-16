@@ -37,6 +37,10 @@
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/drawable/profile_background.xml" value="0.2385" />
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/drawable/profile_dp_background.xml" value="0.2385" />
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/drawable/send_message.xml" value="0.152" />
+        <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/drawable/send_message_edittext.xml" value="0.2375" />
+        <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/drawable/speech_bubble_receiver.xml" value="0.2385" />
+        <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/drawable/speech_bubble_reciever.xml" value="0.2375" />
+        <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/drawable/speech_bubble_sender.xml" value="0.2385" />
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/drawable/stories_background.xml" value="0.2115" />
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/drawable/tab_layout_style.xml" value="0.2385" />
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/layout/activity_chat.xml" value="0.19067977768277042" />
@@ -45,11 +49,13 @@
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/layout/activity_main.xml" value="0.152" />
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/layout/activity_reset_password.xml" value="0.2" />
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/layout/activity_sign_up.xml" value="0.16799999999999998" />
-        <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/layout/activity_user_chatting.xml" value="0.2" />
+        <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/layout/activity_user_chatting.xml" value="0.1" />
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/layout/activity_utility.xml" value="0.1905982905982906" />
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/layout/activity_verify_otp.xml" value="0.1905982905982906" />
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/layout/bottom_nav_layout.xml" value="0.17905982905982906" />
+        <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/layout/chat_reciever_rv_layout.xml" value="0.264" />
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/layout/chat_rv_layout.xml" value="0.2" />
+        <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/layout/chat_sender_rv_layout.xml" value="0.4" />
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/layout/chat_user_rv_layout.xml" value="0.19067977768277042" />
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/layout/content_chat.xml" value="0.19067977768277042" />
         <entry key="..\:/My Things/Coding/Projects/Android/InstaShop/app/src/main/res/layout/feed_rv_layout.xml" value="0.2" />

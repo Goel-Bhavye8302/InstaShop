@@ -1,4 +1,4 @@
-package com.ai.game.instashop;
+package com.ai.game.instashop.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +16,7 @@ import com.ai.game.instashop.Fragment.HomeFragment;
 import com.ai.game.instashop.Fragment.NotifyFragment;
 import com.ai.game.instashop.Fragment.ProfileFragment;
 import com.ai.game.instashop.Fragment.ShopFragment;
+import com.ai.game.instashop.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
