@@ -124,8 +124,8 @@ public class SearchUsersAdapter extends RecyclerView.Adapter<SearchUsersAdapter.
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             profile = itemView.findViewById(R.id.profile_image);
-            name = itemView.findViewById(R.id.chatName);
-            profession = itemView.findViewById(R.id.chatMessage);
+            name = itemView.findViewById(R.id.SearchName);
+            profession = itemView.findViewById(R.id.searchProfession);
             follow = itemView.findViewById(R.id.follow);
         }
     }

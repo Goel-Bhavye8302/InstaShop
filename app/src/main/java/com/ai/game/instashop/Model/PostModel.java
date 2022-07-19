@@ -1,81 +1,66 @@
 package com.ai.game.instashop.Model;
 
 public class PostModel {
-    int profile, post, save;
-    String name, bio, like, comment, share;
+    private String postId, postImage, postDescription, postedById;
+    private Long postedAtTime;
+    private int likeCount;
 
-    public PostModel(int profile, int post, int save, String name, String bio, String like, String comment, String share) {
-        this.profile = profile;
-        this.post = post;
-        this.save = save;
-        this.name = name;
-        this.bio = bio;
-        this.like = like;
-        this.comment = comment;
-        this.share = share;
+    public PostModel(){
     }
 
-    public void setProfile(int profile) {
-        this.profile = profile;
+    public PostModel(String postId, String postImage, String postDescription, String postedById, Long postedAtTime) {
+        this.postId = postId;
+        this.postImage = postImage;
+        this.postDescription = postDescription;
+        this.postedById = postedById;
+        this.postedAtTime = postedAtTime;
     }
 
-    public void setPost(int post) {
-        this.post = post;
+    public String getPostId() {
+        return postId;
     }
 
-    public void setSave(int save) {
-        this.save = save;
+    public void setPostId(String postId) {
+        this.postId = postId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getPostImage() {
+        return postImage;
     }
 
-    public void setBio(String bio) {
-        this.bio = bio;
+    public void setPostImage(String postImage) {
+        this.postImage = postImage;
     }
 
-    public void setLike(String like) {
-        this.like = like;
+    public String getPostDescription() {
+        return postDescription;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setPostDescription(String postDescription) {
+        this.postDescription = postDescription;
     }
 
-    public void setShare(String share) {
-        this.share = share;
+    public String getPostedById() {
+        return postedById;
     }
 
-    public int getProfile() {
-        return profile;
+    public void setPostedById(String postedById) {
+        this.postedById = postedById;
     }
 
-    public int getPost() {
-        return post;
+    public Long getPostedAtTime() {
+        return postedAtTime;
     }
 
-    public int getSave() {
-        return save;
+    public void setPostedAtTime(Long postedAtTime) {
+        this.postedAtTime = postedAtTime;
     }
 
-    public String getName() {
-        return name;
+    public int getLikeCount() {
+        return likeCount;
     }
 
-    public String getBio() {
-        return bio;
-    }
-
-    public String getLike() {
-        return like;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public String getShare() {
-        return share;
+    public void setLikeCount(int likeCount) {
+        this.likeCount = likeCount;
     }
 }
