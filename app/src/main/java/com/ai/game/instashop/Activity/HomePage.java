@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import com.ai.game.instashop.Fragment.HomeFragment;
 import com.ai.game.instashop.Fragment.NotifyFragment;
+import com.ai.game.instashop.Fragment.PostFragment;
 import com.ai.game.instashop.Fragment.ProfileFragment;
 import com.ai.game.instashop.Fragment.ShopFragment;
 import com.ai.game.instashop.R;
@@ -97,6 +98,10 @@ public class HomePage extends AppCompatActivity implements ChipNavigationBar.OnI
             case R.id.shop:
                 findViewById(R.id.toolbar).setVisibility(View.GONE);
                 fragment = new ShopFragment();
+                break;
+            case R.id.addPost:
+                findViewById(R.id.toolbar).setVisibility(View.GONE);
+                fragment = new PostFragment();
                 break;
             case R.id.profile:
                 findViewById(R.id.toolbar).setVisibility(View.VISIBLE);

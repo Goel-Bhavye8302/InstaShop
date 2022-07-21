@@ -2,6 +2,7 @@ package com.ai.game.instashop.Fragment;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,6 +16,11 @@ import com.ai.game.instashop.Adapter.StoryAdapter;
 import com.ai.game.instashop.Model.PostModel;
 import com.ai.game.instashop.Model.StoryModel;
 import com.ai.game.instashop.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -24,6 +30,9 @@ public class FeedFragment extends Fragment {
     ArrayList<StoryModel> storyModelList;
     ArrayList<PostModel> postModelList;
 
+    FirebaseDatabase database;
+    FirebaseAuth mAuth;
+
     public FeedFragment() {
         // Required empty public constructor
     }
@@ -32,6 +41,8 @@ public class FeedFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mAuth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
     }
 
     @Override
@@ -42,41 +53,52 @@ public class FeedFragment extends Fragment {
         postRV = view.findViewById(R.id.post_rv);
 
         storyModelList = new ArrayList<>();
-        storyModelList.add(new StoryModel(R.drawable.gradient, R.drawable.user2, "Rahul"));
-        storyModelList.add(new StoryModel(R.drawable.gradient, R.drawable.user2, "Rahul"));
-        storyModelList.add(new StoryModel(R.drawable.gradient, R.drawable.user2, "Rahul"));
-        storyModelList.add(new StoryModel(R.drawable.gradient, R.drawable.user2, "Rahul"));
-        storyModelList.add(new StoryModel(R.drawable.gradient, R.drawable.user2, "Rahul"));
-        storyModelList.add(new StoryModel(R.drawable.gradient, R.drawable.user2, "Rahul"));
-        storyModelList.add(new StoryModel(R.drawable.gradient, R.drawable.user2, "Rahul"));
-        storyModelList.add(new StoryModel(R.drawable.gradient, R.drawable.user2, "Rahul"));
+        postModelList = new ArrayList<>();
 
-        StoryAdapter adapter = new StoryAdapter(storyModelList, getContext());
+        StoryAdapter storyAdapter = new StoryAdapter(storyModelList, getContext());
+        PostAdapter postAdapter = new PostAdapter(postModelList, getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
 
         storyRV.setLayoutManager(linearLayoutManager);
         storyRV.setNestedScrollingEnabled(false);
-        storyRV.setAdapter(adapter);
-
-        postModelList = new ArrayList<>();
-        postModelList.add(new PostModel(R.drawable.user2, R.drawable.gradient, R.drawable.ic_save_post,"Rahul", "Jai Hind", "3122", "200", "94"));
-        postModelList.add(new PostModel(R.drawable.user2, R.drawable.gradient, R.drawable.ic_save_post,"Rahul", "Jai Hind", "3122", "200", "94"));
-        postModelList.add(new PostModel(R.drawable.user2, R.drawable.gradient, R.drawable.ic_save_post,"Rahul", "Jai Hind", "3122", "200", "94"));
-        postModelList.add(new PostModel(R.drawable.user2, R.drawable.gradient, R.drawable.ic_save_post,"Rahul", "Jai Hind", "3122", "200", "94"));
-        postModelList.add(new PostModel(R.drawable.user2, R.drawable.gradient, R.drawable.ic_save_post,"Rahul", "Jai Hind", "3122", "200", "94"));
-        postModelList.add(new PostModel(R.drawable.user2, R.drawable.gradient, R.drawable.ic_save_post,"Rahul", "Jai Hind", "3122", "200", "94"));
-        postModelList.add(new PostModel(R.drawable.user2, R.drawable.gradient, R.drawable.ic_save_post,"Rahul", "Jai Hind", "3122", "200", "94"));
-        postModelList.add(new PostModel(R.drawable.user2, R.drawable.gradient, R.drawable.ic_save_post,"Rahul", "Jai Hind", "3122", "200", "94"));
-        postModelList.add(new PostModel(R.drawable.user2, R.drawable.gradient, R.drawable.ic_save_post,"Rahul", "Jai Hind", "3122", "200", "94"));
-        postModelList.add(new PostModel(R.drawable.user2, R.drawable.gradient, R.drawable.ic_save_post,"Rahul", "Jai Hind", "3122", "200", "94"));
-        postModelList.add(new PostModel(R.drawable.user2, R.drawable.gradient, R.drawable.ic_save_post,"Rahul", "Jai Hind", "3122", "200", "94"));
-
-        PostAdapter adapter1 = new PostAdapter(postModelList, getContext());
-        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
 
         postRV.setLayoutManager(linearLayoutManager1);
         postRV.setNestedScrollingEnabled(false);
-        postRV.setAdapter(adapter1);
+
+
+
+        postRV.setAdapter(postAdapter);
+
+        storyModelList.add(new StoryModel(R.drawable.gradient, R.drawable.user2, "Rahul"));
+        storyModelList.add(new StoryModel(R.drawable.gradient, R.drawable.user2, "Rahul"));
+        storyModelList.add(new StoryModel(R.drawable.gradient, R.drawable.user2, "Rahul"));
+        storyModelList.add(new StoryModel(R.drawable.gradient, R.drawable.user2, "Rahul"));
+        storyModelList.add(new StoryModel(R.drawable.gradient, R.drawable.user2, "Rahul"));
+        storyModelList.add(new StoryModel(R.drawable.gradient, R.drawable.user2, "Rahul"));
+        storyModelList.add(new StoryModel(R.drawable.gradient, R.drawable.user2, "Rahul"));
+        storyModelList.add(new StoryModel(R.drawable.gradient, R.drawable.user2, "Rahul"));
+        storyRV.setAdapter(storyAdapter);
+
+        database.getReference().child("Posts").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                postModelList.clear();
+                if(snapshot.exists()){
+                    for(DataSnapshot data : snapshot.getChildren()){
+                        PostModel model = data.getValue(PostModel.class);
+                        model.setPostId(data.getKey());
+                        postModelList.add(model);
+                    }
+                }
+                postAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         return view;
     }

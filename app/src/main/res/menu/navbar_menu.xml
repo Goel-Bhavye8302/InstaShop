@@ -30,6 +30,15 @@
 <!--        app:cnb_backgroundColor="#FAE2E2"-->
 <!--        app:cnb_iconColor="@color/red2"-->
 <!--        app:cnb_textColor="@color/black"/>-->
+
+    <item
+        android:id="@+id/addPost"
+        android:icon="@drawable/plus"
+        android:title="Add Post"
+        app:cnb_backgroundColor="#FAE2E2"
+        app:cnb_iconColor="@color/red2"
+        app:cnb_textColor="@color/black"/>
+
     <item
         android:id="@+id/notify"
         android:icon="@drawable/ic_notification"

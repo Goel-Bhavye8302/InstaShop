@@ -68,6 +68,15 @@ dependencies {
     // Image Picker
     implementation 'com.github.dhaval2404:imagepicker:2.1'
 
+    // Expandable TextViews
+    implementation 'kr.co.prnd:readmore-textview:1.0.0'
+
+    // TimeAgo Library
+    implementation 'com.github.marlonlom:timeago:4.0.3'
+
+    // Circular Status View for stories 
+    implementation 'com.github.3llomi:CircularStatusView:V1.0.2'
+
     // for image downloading and caching library
     implementation 'com.squareup.picasso:picasso:2.8'
 
