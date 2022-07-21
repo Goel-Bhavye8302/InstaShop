@@ -1,6 +1,7 @@
 package com.ai.game.instashop.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ai.game.instashop.Activity.CommentActivity;
 import com.ai.game.instashop.Model.Firebase_User;
 import com.ai.game.instashop.Model.PostModel;
 import com.ai.game.instashop.Model.StoryModel;
@@ -24,6 +26,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
+import kr.co.prnd.readmore.ReadMoreTextView;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
     private ArrayList<PostModel> postModelList;
@@ -44,14 +48,18 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         PostModel model = postModelList.get(position);
+        Intent intent = new Intent(context, CommentActivity.class);
 
         Picasso.get().load(model.getPostImage()).placeholder(R.drawable.ic_placeholder_post).into(holder.post);
+        intent.putExtra("postImage", model.getPostImage());
         if(!model.getPostDescription().isEmpty()) {
             holder.description.setText(model.getPostDescription());
             holder.description.setVisibility(View.VISIBLE);
+            intent.putExtra("description", model.getPostDescription());
         }
 
         holder.like.setText(model.getLikeCount() + "");
+        holder.comment.setText(model.getCommentCount() + "");
 
         FirebaseDatabase.getInstance().getReference().child("Posts")
                 .child(model.getPostId())
@@ -102,7 +110,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
                 if(snapshot.exists()){
                     Firebase_User user = snapshot.getValue(Firebase_User.class);
                     holder.name.setText(user.getName());
+                    intent.putExtra("username", user.getName());
                     Picasso.get().load(user.getProfilePhoto()).placeholder(R.drawable.user2).into(holder.profile);
+                    intent.putExtra("profilePhoto", user.getProfilePhoto());
                     holder.bio.setText(user.getProfession());
                 }
             }
@@ -110,6 +120,15 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+
+        holder.comment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent.putExtra("postId", model.getPostId());
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
             }
         });
     }
@@ -121,7 +140,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
 
     class ViewHolder extends RecyclerView.ViewHolder{
         public ImageView profile, post, save;
-        public TextView name, bio, like, comment, share, description;
+        public TextView name, bio, like, comment, share;
+        public ReadMoreTextView description;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

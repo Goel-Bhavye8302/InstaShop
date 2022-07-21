@@ -47,6 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:text="1:00 pm"
+        android:fontFamily="@font/roboto_medium"
         app:layout_constraintBottom_toBottomOf="@+id/chatName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/chatName" />

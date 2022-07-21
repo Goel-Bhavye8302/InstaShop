@@ -126,7 +126,6 @@
         android:layout_marginStart="@dimen/_19sdp"
         android:drawablePadding="3dp"
         android:gravity="center_vertical"
-        android:text="0"
         app:drawableStartCompat="@drawable/postshare"
         app:drawableTint="@color/gray1"
         app:layout_constraintBottom_toBottomOf="@+id/post_comment"

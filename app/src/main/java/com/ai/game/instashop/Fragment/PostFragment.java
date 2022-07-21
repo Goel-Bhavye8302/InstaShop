@@ -51,7 +51,7 @@ public class PostFragment extends Fragment {
     FirebaseAuth mAuth;
     FirebaseStorage storage;
 
-    ProgressDialog progressDialog;
+    ProgressDialog progressDialog, progressDialog2;
 
     Uri postImageUri;
 
@@ -69,15 +69,19 @@ public class PostFragment extends Fragment {
         storage = FirebaseStorage.getInstance();
 
         progressDialog = new ProgressDialog(getContext());
-
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.setTitle("Uploading Post");
         progressDialog.setMessage("Please Wait...");
         progressDialog.setCancelable(false);
         progressDialog.setCanceledOnTouchOutside(false);
-    }
 
-    // todo : add read more functionality to description of image
+        progressDialog2 = new ProgressDialog(getContext());
+        progressDialog2.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog2.setMessage("Please Wait...");
+        progressDialog2.setTitle("Uploading Image");
+        progressDialog2.setCancelable(false);
+        progressDialog2.setCanceledOnTouchOutside(false);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -181,15 +185,12 @@ public class PostFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(data != null){
+            progressDialog2.show();
             postImageUri = data.getData();
-
-            getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-//            progressBar.setVisibility(View.VISIBLE);
             postImage.setImageURI(postImageUri);
             postImage.setVisibility(View.VISIBLE);
             enablePostButton(true);
-
-            getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+            progressDialog2.dismiss();
         }
     }
 

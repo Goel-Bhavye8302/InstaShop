@@ -3,7 +3,7 @@ package com.ai.game.instashop.Model;
 public class PostModel {
     private String postId, postImage, postDescription, postedById;
     private Long postedAtTime;
-    private int likeCount;
+    private int likeCount, commentCount;
 
     public PostModel(){
     }
@@ -62,5 +62,13 @@ public class PostModel {
 
     public void setLikeCount(int likeCount) {
         this.likeCount = likeCount;
+    }
+
+    public int getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(int commentCount) {
+        this.commentCount = commentCount;
     }
 }
