@@ -2,25 +2,44 @@ package com.ai.game.instashop.Model;
 
 // This class is responsible for holding the structure of every item of recycler view
 
-public class StoryModel {
-    int story, profile;
-    String name;
+import java.util.ArrayList;
 
-    public StoryModel(int story, int profile, String name) {
-        this.story = story;
-        this.profile = profile;
-        this.name = name;
+public class StoryModel {
+    private String storyById;
+    private long storyAtTime;
+    ArrayList<UserStoriesModel> storyList;
+
+    public StoryModel(String storyById, long storyAtTime, ArrayList<UserStoriesModel> storyList) {
+        this.storyById = storyById;
+        this.storyAtTime = storyAtTime;
+        this.storyList = storyList;
     }
 
-    public int getStory() { return story;}
+    public StoryModel() {
+    }
 
-    public int getProfile() { return profile; }
 
-    public String getName() { return name; }
+    public String getStoryById() {
+        return storyById;
+    }
 
-    public void setStory(int story) { this.story = story; }
+    public void setStoryById(String storyById) {
+        this.storyById = storyById;
+    }
 
-    public void setProfile(int profile) { this.profile = profile; }
+    public long getStoryAtTime() {
+        return storyAtTime;
+    }
 
-    public void setName(String name) { this.name = name; }
+    public void setStoryAtTime(long storyAtTime) {
+        this.storyAtTime = storyAtTime;
+    }
+
+    public ArrayList<UserStoriesModel> getStoryList() {
+        return storyList;
+    }
+
+    public void setStoryList(ArrayList<UserStoriesModel> storyList) {
+        this.storyList = storyList;
+    }
 }

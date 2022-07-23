@@ -77,6 +77,12 @@ dependencies {
     // Circular Status View for stories 
     implementation 'com.github.3llomi:CircularStatusView:V1.0.2'
 
+    // Story View
+    implementation 'com.github.OMARIHAMZA:StoryView:1.0.2-alpha'
+
+    // Shimmer effect for Recycler View
+    implementation 'com.github.sharish:ShimmerRecyclerView:v1.3'
+
     // for image downloading and caching library
     implementation 'com.squareup.picasso:picasso:2.8'
 
