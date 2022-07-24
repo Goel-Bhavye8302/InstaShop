@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ai.game.instashop.Model.Firebase_User;
+import com.ai.game.instashop.Model.NotificationModel;
 import com.ai.game.instashop.Model.ProfileFriendsModel;
 import com.ai.game.instashop.R;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -91,9 +92,20 @@ public class SearchUsersAdapter extends RecyclerView.Adapter<SearchUsersAdapter.
                                                             .child("FollowersCount").setValue(user.getFollowersCount() + 1).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                                 @Override
                                                                 public void onSuccess(Void unused) {
-                                                                    Toast.makeText(context, "Following!", Toast.LENGTH_SHORT).show();
-                                                                    activity.findViewById(R.id.search_progressBar).setVisibility(View.GONE);
-                                                                    activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                                                                    NotificationModel notificationModel = new NotificationModel();
+                                                                    notificationModel.setNotificationAtTime(new Date().getTime());
+                                                                    notificationModel.setNotificationById(FirebaseAuth.getInstance().getUid());
+                                                                    notificationModel.setNotificationType("follow");
+
+                                                                    FirebaseDatabase.getInstance().getReference().child("Notifications")
+                                                                            .child(user.getUid()).push().setValue(notificationModel).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                                @Override
+                                                                                public void onSuccess(Void unused) {
+                                                                                    Toast.makeText(context, "Following!", Toast.LENGTH_SHORT).show();
+                                                                                    activity.findViewById(R.id.search_progressBar).setVisibility(View.GONE);
+                                                                                    activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                                                                                }
+                                                                            });
                                                                 }
                                                             });
                                                 }

@@ -112,10 +112,10 @@ public class FeedFragment extends Fragment {
                         model.setStoryList(list);
                         storyModelList.add(model);
                     }
-                    storyRV.setAdapter(storyAdapter);
-                    storyRV.hideShimmerAdapter();
-                    storyAdapter.notifyDataSetChanged();
                 }
+                storyRV.setAdapter(storyAdapter);
+                storyRV.hideShimmerAdapter();
+                storyAdapter.notifyDataSetChanged();
             }
 
             @Override

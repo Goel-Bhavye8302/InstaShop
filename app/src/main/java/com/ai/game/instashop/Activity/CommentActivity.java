@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import com.ai.game.instashop.Adapter.CommentAdapter;
 import com.ai.game.instashop.Model.CommentModel;
+import com.ai.game.instashop.Model.Firebase_User;
+import com.ai.game.instashop.Model.NotificationModel;
 import com.ai.game.instashop.Model.PostModel;
 import com.ai.game.instashop.R;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -37,7 +39,7 @@ public class CommentActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseDatabase database;
     Intent intent;
-    String postId;
+    String postId, postedById;
     ImageView postImage, profileImage;
     TextView username;
     ReadMoreTextView description;
@@ -53,7 +55,7 @@ public class CommentActivity extends AppCompatActivity {
 
         intent = getIntent();
         postId = intent.getStringExtra("postId");
-        Log.i("sdsajhgvsadjfvhdsjkfh", postId);
+        postedById = intent.getStringExtra("postedById");
         postImage = findViewById(R.id.comment_post);
         profileImage = findViewById(R.id.profile_image);
         username = findViewById(R.id.comment_name);
@@ -66,13 +68,40 @@ public class CommentActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
 
-        if(intent.getStringExtra("description") != null){
-            description.setText(intent.getStringExtra("description"));
-            description.setVisibility(View.VISIBLE);
-        }
-        Picasso.get().load(intent.getStringExtra("postImage")).placeholder(R.drawable.ic_placeholder_post).into(postImage);
-        Picasso.get().load(intent.getStringExtra("profilePhoto")).placeholder(R.drawable.user2).into(profileImage);
-        username.setText(intent.getStringExtra("username"));
+        database.getReference().child("Posts").child(postId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    PostModel model = snapshot.getValue(PostModel.class);
+                    if(!model.getPostDescription().isEmpty()){
+                        description.setText(model.getPostDescription());
+                        description.setVisibility(View.VISIBLE);
+                    }
+                    Picasso.get().load(model.getPostImage()).placeholder(R.drawable.ic_placeholder_post).into(postImage);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        database.getReference().child("Users").child(postedById).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    Firebase_User user = snapshot.getValue(Firebase_User.class);
+                    Picasso.get().load(user.getProfilePhoto()).placeholder(R.drawable.user2).into(profileImage);
+                    username.setText(user.getName());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         findViewById(R.id.send_comment).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,6 +131,20 @@ public class CommentActivity extends AppCompatActivity {
                                                             .setValue(count + 1).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                                 @Override
                                                                 public void onSuccess(Void unused) {
+                                                                    NotificationModel notification = new NotificationModel();
+                                                                    notification.setNotificationById(mAuth.getUid());
+                                                                    notification.setNotificationAtTime(new Date().getTime());
+                                                                    notification.setPostedBy(postedById);
+                                                                    notification.setPostId(postId);
+                                                                    notification.setNotificationType("comment");
+
+                                                                    database.getReference().child("Notifications").child(postedById)
+                                                                            .push().setValue(notification).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                                @Override
+                                                                                public void onSuccess(Void unused) {
+
+                                                                                }
+                                                                            });
                                                                 }
                                                             });
                                                 }

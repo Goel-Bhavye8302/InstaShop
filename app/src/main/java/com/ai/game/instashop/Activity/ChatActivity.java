@@ -1,5 +1,6 @@
 package com.ai.game.instashop.Activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -48,11 +49,6 @@ public class ChatActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
 
-        //-------------
-//        Intent intent = new Intent(this, UserChattingActivity.class);
-//        startActivity(intent);
-        //---------------
-
         searchIcon = findViewById(R.id.search);
         searchUser = findViewById(R.id.chatSeachUser);
         recyclerView = findViewById(R.id.chat_rv);
@@ -70,10 +66,18 @@ public class ChatActivity extends AppCompatActivity {
                     imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
                 }
                 else {
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+                    //Find the currently focused view, so we can grab the correct window token from it.
+                    View view = getCurrentFocus();
+                    //If no view currently has focus, create a new one, just so we can grab a window token from it
+                    if (view == null) {
+                        view = new View(ChatActivity.this);
+                    }
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                    view.clearFocus();
+
                     searchUser.setVisibility(View.GONE);
 
-                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
                 }
             }
         });
@@ -211,5 +215,9 @@ public class ChatActivity extends AppCompatActivity {
     public void onBackPressed() {
         Intent intent = new Intent(this, HomePage.class);
         startActivity(intent);
+    }
+
+    public void hideKeyboard(Activity activity) {
+
     }
 }
