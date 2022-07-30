@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/MyMaterialTheme">
         <activity
+            android:name=".Activity.ProductDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.CommentActivity"
             android:exported="false" />
         <activity

@@ -8,5 +8,9 @@
         <item>@font/roboto</item>
         <item>@font/roboto_light</item>
         <item>@font/roboto_medium</item>
+        <item>@font/rubik</item>
+        <item>@font/rubik_bold</item>
+        <item>@font/rubik_bold_italic</item>
+        <item>@font/rubik_medium</item>
     </array>
 </resources>
