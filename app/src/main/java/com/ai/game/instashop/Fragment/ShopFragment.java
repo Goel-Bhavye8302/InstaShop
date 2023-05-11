@@ -1,20 +1,22 @@
 package com.ai.game.instashop.Fragment;
 
-import android.graphics.Color;
-import android.graphics.Typeface;
-import android.media.Image;
+import android.content.Context;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.core.content.res.ResourcesCompat;
-import androidx.fragment.app.Fragment;
-
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 import com.ai.game.instashop.Model.Firebase_User;
 import com.ai.game.instashop.R;
@@ -24,6 +26,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
+
+import java.io.IOException;
+import java.util.Objects;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class ShopFragment extends Fragment {
 
@@ -39,11 +48,7 @@ public class ShopFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_shop, container, false);
-        view.findViewById(R.id.cat1).animate().rotation(270).setDuration(0);
-        view.findViewById(R.id.cat2).animate().rotation(270).setDuration(0);
-        view.findViewById(R.id.cat3).animate().rotation(270).setDuration(0);
-        view.findViewById(R.id.cat4).animate().rotation(270).setDuration(0);
-
+        ProgressBar bar = view.findViewById(R.id.progressBar);
         FirebaseDatabase.getInstance().getReference().child("Users").child(FirebaseAuth.getInstance().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -60,49 +65,51 @@ public class ShopFragment extends Fragment {
             }
         });
 
-        TextView cat1 = view.findViewById(R.id.cat1);
-        TextView cat2 = view.findViewById(R.id.cat2);
-        TextView cat3 = view.findViewById(R.id.cat3);
-        TextView cat4 = view.findViewById(R.id.cat4);
+        EditText item = view.findViewById(R.id.editTextSearchUser);
+        TextView searched_items = view.findViewById(R.id.searched_items);
+        OkHttpClient client = new OkHttpClient();
 
-        Typeface selected = ResourcesCompat.getFont(getContext(), R.font.rubik_bold_italic);
+        item.setOnKeyListener(new View.OnKeyListener() {
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                // If the event is a key-down event on the "enter" button
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    InputMethodManager imm = (InputMethodManager) requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
 
-        loadFragments(new ElectronicItemsFragment());
+                    String url = "https://pricer.p.rapidapi.com/str?q=" + item.getText().toString();
+                    Log.i("URLLLLLLLL : ", url);
 
-        view.findViewById(R.id.cat1).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setAllUnselected(view);
-                cat1.setTextColor(Color.parseColor("#005B1B"));
-                cat1.setTypeface(selected);
-                loadFragments(new ElectronicItemsFragment());
-            }
-        });
-        view.findViewById(R.id.cat2).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setAllUnselected(view);
-                cat2.setTextColor(Color.parseColor("#005B1B"));
-                cat2.setTypeface(selected);
-                loadFragments(new SportsItemsFragment());
-            }
-        });
-        view.findViewById(R.id.cat3).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setAllUnselected(view);
-                cat3.setTextColor(Color.parseColor("#005B1B"));
-                cat3.setTypeface(selected);
-                loadFragments(new HomeItemsFragment());
-            }
-        });
-        view.findViewById(R.id.cat4).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setAllUnselected(view);
-                cat4.setTextColor(Color.parseColor("#005B1B"));
-                cat4.setTypeface(selected);
-                loadFragments(new ClothesItemsFragment());
+                    bar.setVisibility(View.VISIBLE);
+                    requireActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
+                    Request request = new Request.Builder()
+                            .url(url)
+                            .get()
+                            .addHeader("X-RapidAPI-Key", "aca811539amshfa686881bbeb359p10d63ajsn90c9a206d2ba")
+                            .addHeader("X-RapidAPI-Host", "pricer.p.rapidapi.com")
+                            .build();
+
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try  {
+                                Response response = client.newCall(request).execute();
+                                if(response.isSuccessful()){
+                                    searched_items.setText(response.body().string());
+                                    Log.i("respose", response.body().toString());
+                                    bar.setVisibility(View.GONE);
+                                    requireActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                                }
+                                else throw new IOException("Unexpected code " + response);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }).start();
+
+                    return true;
+                }
+                return false;
             }
         });
 
@@ -120,25 +127,4 @@ public class ShopFragment extends Fragment {
             Toast.makeText(getContext(), "Fragment Error!", Toast.LENGTH_SHORT).show();
         }
     }
-
-    public void setAllUnselected(View view){
-        TextView cat1 = view.findViewById(R.id.cat1);
-        TextView cat2 = view.findViewById(R.id.cat2);
-        TextView cat3 = view.findViewById(R.id.cat3);
-        TextView cat4 = view.findViewById(R.id.cat4);
-        Typeface notSelected = ResourcesCompat.getFont(getContext(), R.font.rubik_medium);
-
-        cat1.setTextColor(Color.parseColor("#373131"));
-        cat1.setTypeface(notSelected);
-
-        cat2.setTextColor(Color.parseColor("#373131"));
-        cat2.setTypeface(notSelected);
-
-        cat3.setTextColor(Color.parseColor("#373131"));
-        cat3.setTypeface(notSelected);
-
-        cat4.setTextColor(Color.parseColor("#373131"));
-        cat4.setTypeface(notSelected);
-    }
-
 }
