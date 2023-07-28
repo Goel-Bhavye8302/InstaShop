@@ -147,17 +147,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view2" />
 
-        <TextView
-            android:id="@+id/searched_items"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_margin="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextSearchUser"
-            tools:layout="@layout/fragment_electronic_items" />
-
         <ProgressBar
             android:id="@+id/progressBar"
             style="?android:attr/progressBarStyle"
@@ -168,6 +157,16 @@
             app:layout_constraintEnd_toEndOf="@+id/searched_items"
             app:layout_constraintStart_toStartOf="@+id/searched_items"
             app:layout_constraintTop_toTopOf="@+id/searched_items" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/searched_items"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextSearchUser" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

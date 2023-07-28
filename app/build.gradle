@@ -28,6 +28,7 @@ android {
     buildFeatures {
         viewBinding true
     }
+    namespace 'com.ai.game.instashop'
 }
 
 dependencies {
@@ -101,8 +102,11 @@ dependencies {
     // Declare the dependency for the Cloud Storage library
     implementation 'com.google.firebase:firebase-storage'
 
-    // Library for REST API
-    implementation 'com.squareup.okhttp3:okhttp:4.10.0'
+    // JSoup library
+    implementation 'org.jsoup:jsoup:1.16.1'
+
+    // Selenium
+    testImplementation 'org.seleniumhq.selenium:selenium-java:4.10.0'
 }
 
 repositories {
